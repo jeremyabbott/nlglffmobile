@@ -1,0 +1,141 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">iPhoneSimulator</Platform>
+    <ProjectTypeGuids>{FEACFBD2-3405-455C-9665-78FE426C6842};{F2A71F9B-5D33-465A-A702-920D77279786}</ProjectTypeGuids>
+    <ProjectGuid>{2DE544CE-8602-4820-A9D9-BC6BFDF7552D}</ProjectGuid>
+    <OutputType>Exe</OutputType>
+    <RootNamespace>nlglff</RootNamespace>
+    <IPhoneResourcePrefix>Resources</IPhoneResourcePrefix>
+    <AssemblyName>nlglff</AssemblyName>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|iPhoneSimulator' ">
+    <DebugSymbols>true</DebugSymbols>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\iPhoneSimulator\Debug</OutputPath>
+    <DefineConstants>DEBUG;ENABLE_TEST_CLOUD</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <MtouchArch>i386</MtouchArch>
+    <MtouchLink>None</MtouchLink>
+    <MtouchDebug>true</MtouchDebug>
+    <ConsolePause>false</ConsolePause>
+    <PlatformTarget>
+    </PlatformTarget>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|iPhone' ">
+    <DebugSymbols>false</DebugSymbols>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\iPhone\Release</OutputPath>
+    <ErrorReport>prompt</ErrorReport>
+    <GenerateTailCalls>true</GenerateTailCalls>
+    <MtouchArch>ARMv7, ARM64</MtouchArch>
+    <CodesignEntitlements>Entitlements.plist</CodesignEntitlements>
+    <CodesignKey>iPhone Developer</CodesignKey>
+    <ConsolePause>false</ConsolePause>
+    <PlatformTarget>
+    </PlatformTarget>
+    <DefineConstants>
+    </DefineConstants>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|iPhoneSimulator' ">
+    <DebugSymbols>false</DebugSymbols>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\iPhoneSimulator\Release</OutputPath>
+    <ErrorReport>prompt</ErrorReport>
+    <GenerateTailCalls>true</GenerateTailCalls>
+    <MtouchArch>i386</MtouchArch>
+    <MtouchLink>None</MtouchLink>
+    <ConsolePause>false</ConsolePause>
+    <PlatformTarget>
+    </PlatformTarget>
+    <DefineConstants>
+    </DefineConstants>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|iPhone' ">
+    <DebugSymbols>true</DebugSymbols>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\iPhone\Debug</OutputPath>
+    <DefineConstants>DEBUG;ENABLE_TEST_CLOUD</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <MtouchArch>ARMv7, ARM64</MtouchArch>
+    <CodesignEntitlements>Entitlements.plist</CodesignEntitlements>
+    <MtouchDebug>true</MtouchDebug>
+    <CodesignKey>iPhone Developer</CodesignKey>
+    <ConsolePause>false</ConsolePause>
+    <PlatformTarget>
+    </PlatformTarget>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Core" />
+    <Reference Include="mscorlib" />
+    <Reference Include="FSharp.Core" />
+    <Reference Include="Xamarin.Themes.TrackBeam">
+      <HintPath>..\Components\trackbeamtheme-1.5.1\lib\ios-unified\Xamarin.Themes.TrackBeam.dll</HintPath>
+    </Reference>
+    <Reference Include="Xamarin.Themes.Core">
+      <HintPath>..\packages\Xamarin.Themes.Core.1.0.0.1\lib\Xamarin.iOS10\Xamarin.Themes.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="ProlificTheme.Controls.iOS.ProgressBar">
+      <HintPath>..\Components\prolifictheme-1.4.1\lib\ios-unified\ProlificTheme.Controls.iOS.ProgressBar.dll</HintPath>
+    </Reference>
+    <Reference Include="ProlificTheme.Controls.iOS.SegmentedControl">
+      <HintPath>..\Components\prolifictheme-1.4.1\lib\ios-unified\ProlificTheme.Controls.iOS.SegmentedControl.dll</HintPath>
+    </Reference>
+    <Reference Include="ProlificTheme.Controls.iOS.Switch">
+      <HintPath>..\Components\prolifictheme-1.4.1\lib\ios-unified\ProlificTheme.Controls.iOS.Switch.dll</HintPath>
+    </Reference>
+    <Reference Include="ProlificTheme.Utils.iOS">
+      <HintPath>..\Components\prolifictheme-1.4.1\lib\ios-unified\ProlificTheme.Utils.iOS.dll</HintPath>
+    </Reference>
+    <Reference Include="ProlificTheme.iOS">
+      <HintPath>..\Components\prolifictheme-1.4.1\lib\ios-unified\ProlificTheme.iOS.dll</HintPath>
+    </Reference>
+    <Reference Include="Xamarin.iOS" />
+    <Reference Include="Zlib.Portable">
+      <HintPath>..\packages\Zlib.Portable.1.10.0\lib\portable-net4+sl5+wp8+win8+wpa81+MonoTouch+MonoAndroid\Zlib.Portable.dll</HintPath>
+    </Reference>
+    <Reference Include="FSharp.Data">
+      <HintPath>..\packages\FSharp.Data.2.2.3\lib\portable-net40+sl5+wp8+win8\FSharp.Data.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <ImageAsset Include="Resources\Images.xcassets\AppIcons.appiconset\Contents.json" />
+    <ImageAsset Include="Resources\brand_logo.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <InterfaceDefinition Include="Resources\LaunchScreen.xib" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Info.plist" />
+    <None Include="Entitlements.plist" />
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Nlglff.fs">
+    </Compile>
+    <Compile Include="EasyLayout.fs" />
+    <Compile Include="FilmDetailViewController.fs" />
+    <Compile Include="FilmsDataSource.fs" />
+    <Compile Include="ViewController.fs">
+    </Compile>
+    <Compile Include="AppDelegate.fs" />
+  </ItemGroup>
+  <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.FSharp.targets" />
+  <ItemGroup>
+    <XamarinComponentReference Include="prolifictheme">
+      <Version>1.4.1</Version>
+      <Visible>False</Visible>
+    </XamarinComponentReference>
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\brand_logo%402x.png" />
+    <BundleResource Include="Resources\brand_logo%403x.png" />
+    <BundleResource Include="Resources\FilmDetailViewController.fs" />
+    <BundleResource Include="Resources\pace_logo.png" />
+    <BundleResource Include="Resources\pace_logo%402x.png" />
+    <BundleResource Include="Resources\pace_logo%403x.png" />
+  </ItemGroup>
+</Project>

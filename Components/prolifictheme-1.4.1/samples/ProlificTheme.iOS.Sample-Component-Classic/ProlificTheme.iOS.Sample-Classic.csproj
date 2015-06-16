@@ -1,0 +1,174 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">iPhoneSimulator</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{EC1BDED0-DAB8-4448-958A-E6761AB9BCB4}</ProjectGuid>
+    <ProjectTypeGuids>{6BC8ED88-2882-458C-8E55-DFD12B67127B};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <OutputType>Exe</OutputType>
+    <RootNamespace>ThemeSample</RootNamespace>
+    <IPhoneResourcePrefix>Resources</IPhoneResourcePrefix>
+    <ReleaseVersion>0.1.1.1</ReleaseVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|iPhoneSimulator' ">
+    <DebugSymbols>True</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>False</Optimize>
+    <DefineConstants>DEBUG;</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <ConsolePause>False</ConsolePause>
+    <MtouchLink>None</MtouchLink>
+    <MtouchDebug>True</MtouchDebug>
+    <MtouchI18n>
+    </MtouchI18n>
+    <MtouchArch>i386</MtouchArch>
+    <AssemblyName>BlackLeatherThemeSampleiOS</AssemblyName>
+    <OutputPath>bin\classic\iPhoneSimulator\Debug</OutputPath>
+    <BaseIntermediateOutputPath>obj\classic\</BaseIntermediateOutputPath>
+    <IntermediateOutputPath>obj\classic\iPhoneSimulator\Debug</IntermediateOutputPath>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|iPhoneSimulator' ">
+    <DebugType>none</DebugType>
+    <Optimize>True</Optimize>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <ConsolePause>False</ConsolePause>
+    <MtouchLink>None</MtouchLink>
+    <AssemblyName>BlackLeatherThemeSampleiOS</AssemblyName>
+    <OutputPath>bin\classic\iPhoneSimulator\Release</OutputPath>
+    <BaseIntermediateOutputPath>obj\classic\</BaseIntermediateOutputPath>
+    <IntermediateOutputPath>obj\classic\iPhoneSimulator\Release</IntermediateOutputPath>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|iPhone' ">
+    <DebugSymbols>True</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>False</Optimize>
+    <DefineConstants>DEBUG;</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <ConsolePause>False</ConsolePause>
+    <MtouchDebug>True</MtouchDebug>
+    <CodesignKey>iPhone Developer</CodesignKey>
+    <AssemblyName>ProlificThemeSampleiOS</AssemblyName>
+    <MtouchI18n>
+    </MtouchI18n>
+    <MtouchArch>ARMv7</MtouchArch>
+    <IpaPackageName>
+    </IpaPackageName>
+    <OutputPath>bin\classic\iPhone\Debug</OutputPath>
+    <BaseIntermediateOutputPath>obj\classic\</BaseIntermediateOutputPath>
+    <IntermediateOutputPath>obj\classic\iPhone\Debug</IntermediateOutputPath>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|iPhone' ">
+    <DebugType>none</DebugType>
+    <Optimize>True</Optimize>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <ConsolePause>False</ConsolePause>
+    <CodesignKey>iPhone Developer</CodesignKey>
+    <AssemblyName>ProlificThemeSampleiOS</AssemblyName>
+    <OutputPath>bin\classic\iPhone\Release</OutputPath>
+    <BaseIntermediateOutputPath>obj\classic\</BaseIntermediateOutputPath>
+    <IntermediateOutputPath>obj\classic\iPhone\Release</IntermediateOutputPath>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Ad-Hoc|iPhone' ">
+    <DebugType>none</DebugType>
+    <Optimize>True</Optimize>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <BuildIpa>True</BuildIpa>
+    <ConsolePause>False</ConsolePause>
+    <CodesignProvision>Automatic:AdHoc</CodesignProvision>
+    <CodesignKey>iPhone Distribution</CodesignKey>
+    <AssemblyName>ProlificThemeSampleiOS</AssemblyName>
+    <OutputPath>bin\classic\Ad-Hoc\</OutputPath>
+    <BaseIntermediateOutputPath>obj\classic\</BaseIntermediateOutputPath>
+    <IntermediateOutputPath>obj\classic\Ad-Hoc\</IntermediateOutputPath>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'AppStore|iPhone' ">
+    <DebugType>none</DebugType>
+    <Optimize>True</Optimize>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <ConsolePause>False</ConsolePause>
+    <CodesignKey>iPhone Distribution</CodesignKey>
+    <CodesignProvision>Automatic:AppStore</CodesignProvision>
+    <AssemblyName>ProlificThemeSampleiOS</AssemblyName>
+    <OutputPath>bin\classic\AppStore\</OutputPath>
+    <BaseIntermediateOutputPath>obj\classic\</BaseIntermediateOutputPath>
+    <IntermediateOutputPath>obj\classic\AppStore\</IntermediateOutputPath>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Core" />
+    <Reference Include="monotouch" />
+    <Reference Include="ProlificTheme.Controls.iOS.ProgressBar">
+      <HintPath>../../lib\/ios/ProlificTheme.Controls.iOS.ProgressBar.dll</HintPath>
+    </Reference>
+    <Reference Include="ProlificTheme.Controls.iOS.SegmentedControl">
+      <HintPath>../../lib\/ios/ProlificTheme.Controls.iOS.SegmentedControl.dll</HintPath>
+    </Reference>
+    <Reference Include="ProlificTheme.Controls.iOS.Switch">
+      <HintPath>../../lib\/ios/ProlificTheme.Controls.iOS.Switch.dll</HintPath>
+    </Reference>
+    <Reference Include="ProlificTheme.Utils.iOS">
+      <HintPath>../../lib\/ios/ProlificTheme.Utils.iOS.dll</HintPath>
+    </Reference>
+    <Reference Include="ProlificTheme.iOS">
+      <HintPath>../../lib\/ios/ProlificTheme.iOS.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Resources\" />
+    <Folder Include="UI\" />
+    <Folder Include="UI\Main\" />
+    <Folder Include="UI\Elements\" />
+    <Folder Include="UI\Buttons\" />
+    <Folder Include="UI\List\" />
+    <Folder Include="UI\Empty\" />
+    <Folder Include="UI\Common\" />
+    <Folder Include="Model\" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Info.plist" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Main.cs" />
+    <Compile Include="AppDelegate.cs" />
+    <Compile Include="UI\Main\ColorChoiceViewController.cs" />
+    <Compile Include="UI\Elements\ElementsViewController.cs" />
+    <Compile Include="UI\Elements\TextFieldDelegate.cs" />
+    <Compile Include="UI\Buttons\ButtonsViewController.cs" />
+    <Compile Include="UI\List\ListController.cs" />
+    <Compile Include="UI\List\ListCell.cs" />
+    <Compile Include="UI\List\ListSource.cs" />
+    <Compile Include="UI\Empty\EmptyViewController.cs" />
+    <Compile Include="UI\Common\NavigationController.cs" />
+    <Compile Include="UI\List\ListDetailController.cs" />
+    <Compile Include="Model\Concert.cs" />
+  </ItemGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.MonoTouch.CSharp.targets" />
+  <ItemGroup>
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\avatar.png" />
+    <BundleResource Include="Resources\location.png" />
+    <BundleResource Include="Resources\location%402x.png" />
+    <BundleResource Include="Resources\calendar.png" />
+    <BundleResource Include="Resources\calendar%402x.png" />
+    <BundleResource Include="Resources\frame.png" />
+    <BundleResource Include="Resources\frame%402x.png" />
+    <BundleResource Include="Default-568h%402x.png" />
+    <BundleResource Include="Default.png" />
+    <BundleResource Include="Default%402x.png" />
+    <BundleResource Include="Resources\Icon.png" />
+    <BundleResource Include="Resources\Icon-Small.png" />
+    <BundleResource Include="Resources\Icon%402x.png" />
+    <BundleResource Include="Resources\Icon-Small%402x.png" />
+  </ItemGroup>
+</Project>
