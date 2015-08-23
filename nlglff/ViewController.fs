@@ -8,7 +8,7 @@ open Nlglff.Api
 open UIHelpers
 open UIKit
 
-[<Register("ViewController")>]
+//[<Register("ViewController")>]
 type ViewController () =
     inherit UIViewController ()
 
@@ -29,11 +29,7 @@ type ViewController () =
         view.AddSubviews(header, filmListTable, footer)
 
         let padding = nfloat 10.0
-        let twenty = nfloat 20.0
-        let height = nfloat 20.0
-        let forty = nfloat 40.0
         let fifty = nfloat 50.0
-        let sixty = nfloat 60.0
         let eighty = nfloat 80.0
         let width = nfloat 100.0
 
@@ -50,8 +46,6 @@ type ViewController () =
                 footer.Frame.Left = view.Frame.Left
                 footer.Frame.Bottom = view.Frame.Bottom
                 footer.Frame.Height = fifty
-                //footer.Frame.Top = view.Frame.Bottom - fifty
-                //footer.Frame.Right = view.Frame.Right - padding
             |] @> |> ignore
         view
 

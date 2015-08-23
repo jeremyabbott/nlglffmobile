@@ -5,34 +5,37 @@ open EasyLayout
 open Foundation
 open UIKit
 open Nlglff.Api
+open WebKit
 
 type FilmDetailViewController(film: Film) = 
     inherit UIViewController()
 
+    let seventy = nfloat 70.0
     let eighty = nfloat 80.0
     let fontHeight = nfloat 12.0
     let height = nfloat 20.0
     let padding = nfloat 15.0
     let labelWidth = nfloat 65.0
     let adjustment = nfloat 4.0
+    let trailerHeight = (nfloat 9.0) / (nfloat 16.0)
 
-    let getTrailerViewForFilm (film : Film) =
-        let view = new UIWebView()
+    let getTrailerViewForFilm (film : Film) (view : UIView) =
+        let view = new WKWebView(view.Frame, new WKWebViewConfiguration())
 
         let url =
             match film.TrailerUrl with
             | Some u -> u
             | None -> String.Empty
         
-        view.LoadHtmlString(sprintf "<iframe src=\"http://%s\"></iframe>" url, null)
-
+        let request = new NSUrlRequest(new NSUrl(sprintf "http:%s" url))
+        view.LoadRequest(request) |> ignore
         view
 
-    let trailer = getTrailerViewForFilm film
+    let widthLabel = new UILabel(Text = "Width Label", Font = UIFont.FromName("HelveticaNeue-Medium", fontHeight))
 
     let content =
         let view = new UIView(BackgroundColor = UIColor.White)
-        let title = new UILabel(Text = film.Name)
+        let title = new UILabel(Text = film.Name, TextAlignment = UITextAlignment.Center)
         let synopsisLabel = new UILabel(Text = "Synopsis", Font = UIFont.FromName("HelveticaNeue-Medium", fontHeight))
         let synopsis = new UITextView(Text = film.Synopsis, Editable = false)
         let showtimeLabel = new UILabel(Text = "Showtimes", Font = UIFont.FromName("HelveticaNeue-Medium", fontHeight))
@@ -40,18 +43,26 @@ type FilmDetailViewController(film: Film) =
             film.Showtimes
             |> Array.map (fun s -> sprintf "%s @ %s" (s.Date.ToShortDateString()) (s.Time.ToShortTimeString()))
             |> Array.reduce (fun acc item -> sprintf "%s\n%s" acc item)
+        
         let showtimes = new UITextView(Text = showtimeText, Editable = false)
+
+        let trailer = getTrailerViewForFilm film view
 
         view.AddSubviews(title, synopsisLabel, synopsis, showtimeLabel, showtimes, trailer)
 
         view.ConstrainLayout
             <@ [|
-                title.Frame.Top = view.Frame.Top + eighty
-                title.Frame.CenterX = view.Frame.CenterX + padding
+                title.Frame.Top = view.Frame.Top + seventy
+                title.Frame.CenterX = view.Frame.CenterX
                 title.Frame.Height = height
                 title.Frame.Width = view.Frame.Width
 
-                synopsisLabel.Frame.Top = title.Frame.Bottom + padding
+                trailer.Frame.Top = title.Frame.Bottom + padding
+                trailer.Frame.CenterX = view.Frame.CenterX
+                trailer.Frame.Width = view.Frame.Width - padding
+                trailer.Frame.Height = trailer.Frame.Width * trailerHeight 
+
+                synopsisLabel.Frame.Top = trailer.Frame.Bottom + padding
                 synopsisLabel.Frame.Left = view.Frame.Left + padding
                 synopsisLabel.Frame.Height = height
                 synopsisLabel.Frame.Width = labelWidth
@@ -70,11 +81,6 @@ type FilmDetailViewController(film: Film) =
                 showtimes.Frame.Left = showtimeLabel.Frame.Right + padding
                 showtimes.Frame.Height = eighty
                 showtimes.Frame.Width = view.Frame.Width - padding
-
-                trailer.Frame.Top = showtimes.Frame.Bottom + padding
-                trailer.Frame.Height = view.Frame.Width - height
-                trailer.Frame.Width = view.Frame.Width
-                trailer.Frame.Left = view.Frame.Left + padding
             |] @> |> ignore
         view
 
