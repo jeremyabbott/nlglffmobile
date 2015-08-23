@@ -94,11 +94,11 @@
       <HintPath>..\Components\prolifictheme-1.4.1\lib\ios-unified\ProlificTheme.iOS.dll</HintPath>
     </Reference>
     <Reference Include="Xamarin.iOS" />
-    <Reference Include="Zlib.Portable">
-      <HintPath>..\packages\Zlib.Portable.1.10.0\lib\portable-net4+sl5+wp8+win8+wpa81+MonoTouch+MonoAndroid\Zlib.Portable.dll</HintPath>
-    </Reference>
     <Reference Include="FSharp.Data">
-      <HintPath>..\packages\FSharp.Data.2.2.3\lib\portable-net40+sl5+wp8+win8\FSharp.Data.dll</HintPath>
+      <HintPath>..\packages\FSharp.Data.2.2.5\lib\portable-net40+sl5+wp8+win8\FSharp.Data.dll</HintPath>
+    </Reference>
+    <Reference Include="Zlib.Portable">
+      <HintPath>..\packages\Zlib.Portable.1.11.0\lib\portable-net4+sl5+wp8+win8+wpa81+MonoTouch+MonoAndroid\Zlib.Portable.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
@@ -117,6 +117,7 @@
     <Compile Include="Nlglff.fs">
     </Compile>
     <Compile Include="EasyLayout.fs" />
+    <Compile Include="UIHelpers.fs" />
     <Compile Include="FilmDetailViewController.fs" />
     <Compile Include="FilmsDataSource.fs" />
     <Compile Include="ViewController.fs">

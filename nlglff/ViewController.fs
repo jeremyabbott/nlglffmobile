@@ -5,6 +5,7 @@ open System.Drawing
 open EasyLayout
 open Foundation
 open Nlglff.Api
+open UIHelpers
 open UIKit
 
 [<Register("ViewController")>]
@@ -15,15 +16,8 @@ type ViewController () =
             
     let content =
         let view = new UIView(BackgroundColor = UIColor.White)
-        let headerImgView = new UIImageView(UIImage.FromFile("brand_logo.png"))
-
-        let filmDatesLabel = new UILabel()
-        filmDatesLabel.TextAlignment <- UITextAlignment.Center
-        filmDatesLabel.Text <- "September 18th - 24th"
-
-        let footerImgView = new UIImageView(UIImage.FromFile("pace_logo.png"))
-        let footerLabel = new UILabel(Text = "Developed for PACE by Jeremy Abbott",
-                                        Font = UIFont.FromName("HelveticaNeue", (nfloat 14.0f)))
+        let header = UIHelpers.getHeader ()
+        let footer = UIHelpers.getFooter ()
 
         (*let button = UIButton.FromType(UIButtonType.RoundedRect)
         button.SetTitle("Help", UIControlState.Normal)
@@ -32,41 +26,33 @@ type ViewController () =
             (fun _ _ ->
                 anotherLabel.Text <- "Hello world")*)
 
-        view.AddSubviews(headerImgView, filmDatesLabel, filmListTable, footerImgView, footerLabel)
+        view.AddSubviews(header, filmListTable, footer)
 
         let padding = nfloat 10.0
         let twenty = nfloat 20.0
         let height = nfloat 20.0
         let forty = nfloat 40.0
+        let fifty = nfloat 50.0
         let sixty = nfloat 60.0
         let eighty = nfloat 80.0
         let width = nfloat 100.0
 
         view.ConstrainLayout
             <@ [|
-                headerImgView.Frame.Top = view.Frame.Top + eighty
-                headerImgView.Frame.CenterX = view.Frame.CenterX
+                header.Frame.Top = view.Frame.Top + eighty
+                header.Frame.CenterX = view.Frame.CenterX
 
-                filmDatesLabel.Frame.Top = headerImgView.Frame.Bottom + padding
-                filmDatesLabel.Frame.Width = view.Frame.Width
-                filmDatesLabel.Frame.Height = height
-                filmDatesLabel.Frame.CenterX = view.Frame.CenterX
-
-                filmListTable.Frame.Top = filmDatesLabel.Frame.Bottom + padding
+                filmListTable.Frame.Top = header.Frame.Bottom + padding
                 filmListTable.Frame.Width = view.Frame.Width - padding
-                filmListTable.Frame.Bottom = footerImgView.Frame.Top - padding
+                filmListTable.Frame.Bottom = footer.Frame.Top - padding
 
-                footerImgView.Frame.Height = sixty
-                footerImgView.Frame.Width = sixty
-                footerImgView.Frame.Top = view.Frame.Bottom - eighty
-                footerImgView.Frame.Left = view.Frame.Left + twenty
-
-                footerLabel.Frame.Left = footerImgView.Frame.Right + padding
-                footerLabel.Frame.Top = footerImgView.Frame.Top
-                footerLabel.Frame.Right = view.Frame.Right - padding
-                footerLabel.Frame.Height = footerImgView.Frame.Height
+                footer.Frame.Width = view.Frame.Width - padding
+                footer.Frame.Left = view.Frame.Left
+                footer.Frame.Bottom = view.Frame.Bottom
+                footer.Frame.Height = fifty
+                //footer.Frame.Top = view.Frame.Bottom - fifty
+                //footer.Frame.Right = view.Frame.Right - padding
             |] @> |> ignore
-
         view
 
     override x.DidReceiveMemoryWarning () =
