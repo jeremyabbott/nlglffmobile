@@ -118,6 +118,7 @@
     </Compile>
     <Compile Include="EasyLayout.fs" />
     <Compile Include="UIHelpers.fs" />
+    <Compile Include="BaseViewController.fs" />
     <Compile Include="FilmDetailViewController.fs" />
     <Compile Include="FilmsDataSource.fs" />
     <Compile Include="ViewController.fs">
