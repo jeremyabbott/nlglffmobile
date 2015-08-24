@@ -122,6 +122,7 @@
     <Compile Include="FilmDetailViewController.fs" />
     <Compile Include="FilmsDataSource.fs" />
     <Compile Include="FilmListViewController.fs" />
+    <Compile Include="SponsorsDataSource.fs" />
     <Compile Include="ViewController.fs">
     </Compile>
     <Compile Include="AppDelegate.fs" />
