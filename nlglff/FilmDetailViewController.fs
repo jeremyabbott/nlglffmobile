@@ -83,9 +83,8 @@ type FilmDetailViewController(film: Film) =
                 showtimes.Frame.Height = eighty
                 showtimes.Frame.Width = view.Frame.Width - padding
             |] @> |> ignore
-        view
 
     override x.ViewDidLoad () =
         base.ViewDidLoad ()
         x.Title <- film.Name
-        loadContent x.ContentView |> ignore
+        loadContent x.ContentView
