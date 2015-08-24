@@ -14,9 +14,11 @@ type BaseViewController () =
     let eighty = nfloat 80.0
     let width = nfloat 100.0
 
+    let containingView = new UIView(BackgroundColor = UIColor.White) // other views add their content here.
+
     let content =
         let view = new UIView(BackgroundColor = UIColor.White)
-        let containingView = new UIView(BackgroundColor = UIColor.White) // other views add their content here.
+
         let header = UIHelpers.getHeader ()
         let footer = UIHelpers.getFooter ()
 
@@ -28,7 +30,7 @@ type BaseViewController () =
                 header.Frame.CenterX = view.Frame.CenterX
 
                 containingView.Frame.Width = view.Frame.Width
-                containingView.Frame.Top = header.Frame.Bottom
+                containingView.Frame.Top = header.Frame.Bottom + padding
                 containingView.Frame.Bottom = footer.Frame.Top
 
                 footer.Frame.Width = view.Frame.Width - padding
@@ -37,6 +39,8 @@ type BaseViewController () =
                 footer.Frame.Height = fifty
             |] @> |> ignore
         view
+
+    member x.ContentView with get() = containingView
 
     override x.DidReceiveMemoryWarning () =
         // Releases the view if it doesn't have a superview.

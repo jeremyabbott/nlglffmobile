@@ -8,6 +8,7 @@ open Nlglff.Api
 open UIHelpers
 open UIKit
 
+[<Register("ViewController")>]
 type ViewController () =
     inherit UIViewController ()
 

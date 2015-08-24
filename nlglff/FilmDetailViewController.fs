@@ -6,9 +6,10 @@ open Foundation
 open UIKit
 open Nlglff.Api
 open WebKit
+open CoreGraphics
 
 type FilmDetailViewController(film: Film) = 
-    inherit UIViewController()
+    inherit BaseViewController()
 
     let seventy = nfloat 70.0
     let eighty = nfloat 80.0
@@ -33,8 +34,8 @@ type FilmDetailViewController(film: Film) =
 
     let widthLabel = new UILabel(Text = "Width Label", Font = UIFont.FromName("HelveticaNeue-Medium", fontHeight))
 
-    let content =
-        let view = new UIView(BackgroundColor = UIColor.White)
+    let loadContent (view : UIView) =
+
         let title = new UILabel(Text = film.Name, TextAlignment = UITextAlignment.Center)
         let synopsisLabel = new UILabel(Text = "Synopsis", Font = UIFont.FromName("HelveticaNeue-Medium", fontHeight))
         let synopsis = new UITextView(Text = film.Synopsis, Editable = false)
@@ -52,7 +53,7 @@ type FilmDetailViewController(film: Film) =
 
         view.ConstrainLayout
             <@ [|
-                title.Frame.Top = view.Frame.Top + seventy
+                title.Frame.Top = view.Frame.Top
                 title.Frame.CenterX = view.Frame.CenterX
                 title.Frame.Height = height
                 title.Frame.Width = view.Frame.Width
@@ -85,5 +86,6 @@ type FilmDetailViewController(film: Film) =
         view
 
     override x.ViewDidLoad () =
-        x.View <- content
+        base.ViewDidLoad ()
         x.Title <- film.Name
+        loadContent x.ContentView |> ignore
