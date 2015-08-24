@@ -8,7 +8,7 @@ open Nlglff.Api
 open WebKit
 open CoreGraphics
 
-type FilmListViewController(film: Film) = 
+type FilmListViewController() = 
     inherit BaseViewController()
 
     let filmListTable = new UITableView()

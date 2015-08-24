@@ -14,13 +14,13 @@ type ViewController () =
 
     let filmListTable = new UITableView()
             
-    let loadContent (view : UIView) =
+    let loadContent (view : UIView) (navController : UINavigationController) =
         let filmButton = UIButton.FromType(UIButtonType.RoundedRect)
         filmButton.SetTitle("Films", UIControlState.Normal)
 
         filmButton.TouchUpInside.AddHandler
             (fun _ _ ->
-                printfn "%s" "Hello world")
+                navController.PushViewController(new FilmListViewController(), true))
 
         view.AddSubviews(filmButton)
 
@@ -41,13 +41,10 @@ type ViewController () =
     override x.ViewDidLoad () =
         base.ViewDidLoad ()
         x.Title <- "2015 NLGLFF"
-        loadContent x.ContentView
+        loadContent x.ContentView x.NavigationController
 
     override x.ViewWillAppear animated =
         base.ViewWillAppear animated
-
-        filmListTable.Source <- new FilmsDataSource(Nlglff.Api.loadFilms(), x.NavigationController)
-        filmListTable.ReloadData()
 
     override x.ShouldAutorotateToInterfaceOrientation (toInterfaceOrientation) =
         // Return true for supported orientations
