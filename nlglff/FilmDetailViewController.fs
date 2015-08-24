@@ -11,13 +11,12 @@ open CoreGraphics
 type FilmDetailViewController(film: Film) = 
     inherit BaseViewController()
 
-    let seventy = nfloat 70.0
+    let adjustment = nfloat 4.0
     let eighty = nfloat 80.0
     let fontHeight = nfloat 12.0
     let height = nfloat 20.0
-    let padding = nfloat 15.0
     let labelWidth = nfloat 65.0
-    let adjustment = nfloat 4.0
+    let padding = nfloat 15.0
     let trailerHeight = (nfloat 9.0) / (nfloat 16.0)
 
     let getTrailerViewForFilm (film : Film) (view : UIView) =
@@ -31,9 +30,7 @@ type FilmDetailViewController(film: Film) =
         let request = new NSUrlRequest(new NSUrl(sprintf "http:%s" url))
         view.LoadRequest(request) |> ignore
         view
-
-    let widthLabel = new UILabel(Text = "Width Label", Font = UIFont.FromName("HelveticaNeue-Medium", fontHeight))
-
+    
     let loadContent (view : UIView) =
 
         let title = new UILabel(Text = film.Name, TextAlignment = UITextAlignment.Center)

@@ -15,25 +15,22 @@ type ViewController () =
     let filmListTable = new UITableView()
             
     let loadContent (view : UIView) =
-        (*let button = UIButton.FromType(UIButtonType.RoundedRect)
-        button.SetTitle("Help", UIControlState.Normal)
+        let filmButton = UIButton.FromType(UIButtonType.RoundedRect)
+        filmButton.SetTitle("Films", UIControlState.Normal)
 
-        button.TouchUpInside.AddHandler
+        filmButton.TouchUpInside.AddHandler
             (fun _ _ ->
-                anotherLabel.Text <- "Hello world")*)
+                printfn "%s" "Hello world")
 
-        view.AddSubviews(filmListTable)
+        view.AddSubviews(filmButton)
 
         let padding = nfloat 10.0
-        let fifty = nfloat 50.0
-        let eighty = nfloat 80.0
-        let width = nfloat 100.0
 
         view.ConstrainLayout
             <@ [|
-                filmListTable.Frame.Top = view.Frame.Top + padding
-                filmListTable.Frame.Width = view.Frame.Width - padding
-                filmListTable.Frame.Bottom = view.Frame.Bottom
+                filmButton.Frame.Top = view.Frame.Top + padding
+                filmButton.Frame.Width = view.Frame.Width - padding
+                filmButton.Frame.Bottom = view.Frame.Bottom
             |] @> |> ignore
 
     override x.DidReceiveMemoryWarning () =
