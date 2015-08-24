@@ -12,17 +12,23 @@ open UIKit
 type ViewController () =
     inherit BaseViewController ()
 
+    let height = nfloat 20.0
     let filmListTable = new UITableView()
             
     let loadContent (view : UIView) (navController : UINavigationController) =
         let filmButton = UIButton.FromType(UIButtonType.RoundedRect)
         filmButton.SetTitle("Films", UIControlState.Normal)
-
         filmButton.TouchUpInside.AddHandler
             (fun _ _ ->
                 navController.PushViewController(new FilmListViewController(), true))
 
-        view.AddSubviews(filmButton)
+        let sponsorButton = UIButton.FromType(UIButtonType.RoundedRect)
+        sponsorButton.SetTitle("Sponsors", UIControlState.Normal)
+        sponsorButton.TouchUpInside.AddHandler
+            (fun _ _ ->
+                navController.PushViewController(new SponsorListViewController(), true))
+
+        view.AddSubviews(filmButton, sponsorButton)
 
         let padding = nfloat 10.0
 
@@ -30,7 +36,13 @@ type ViewController () =
             <@ [|
                 filmButton.Frame.Top = view.Frame.Top + padding
                 filmButton.Frame.Width = view.Frame.Width - padding
-                filmButton.Frame.Bottom = view.Frame.Bottom
+                filmButton.Frame.Height = height
+                filmButton.Frame.CenterX = view.Frame.CenterX
+
+                sponsorButton.Frame.Top = filmButton.Frame.Bottom + padding
+                sponsorButton.Frame.Width = filmButton.Frame.Width - padding
+                sponsorButton.Frame.Height = height
+                sponsorButton.Frame.CenterX = view.Frame.CenterX
             |] @> |> ignore
 
     override x.DidReceiveMemoryWarning () =
