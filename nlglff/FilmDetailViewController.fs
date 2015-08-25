@@ -31,8 +31,8 @@ type FilmDetailViewController(film: Film) =
         view.LoadRequest(request) |> ignore
         view
     
-    let loadContent (view : UIView) =
-
+    let content =
+        let view = new UIView(BackgroundColor = UIColor.White)
         let title = new UILabel(Text = film.Name, TextAlignment = UITextAlignment.Center)
         let synopsisLabel = new UILabel(Text = "Synopsis", Font = UIFont.FromName("HelveticaNeue-Medium", fontHeight))
         let synopsis = new UITextView(Text = film.Synopsis, Editable = false)
@@ -50,7 +50,7 @@ type FilmDetailViewController(film: Film) =
 
         view.ConstrainLayout
             <@ [|
-                title.Frame.Top = view.Frame.Top
+                title.Frame.Top = view.Frame.Top + eighty
                 title.Frame.CenterX = view.Frame.CenterX
                 title.Frame.Height = height
                 title.Frame.Width = view.Frame.Width
@@ -80,8 +80,9 @@ type FilmDetailViewController(film: Film) =
                 showtimes.Frame.Height = eighty
                 showtimes.Frame.Width = view.Frame.Width - padding
             |] @> |> ignore
+        view
 
     override x.ViewDidLoad () =
         base.ViewDidLoad ()
         x.Title <- film.Name
-        loadContent x.ContentView
+        x.View <- content

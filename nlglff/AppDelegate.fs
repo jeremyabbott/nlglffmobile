@@ -15,9 +15,10 @@ type AppDelegate () =
     override this.FinishedLaunching (app, options) =
         this.Window <- new UIWindow(UIScreen.MainScreen.Bounds)
         let mainViewController = new ViewController()
+
         this.Window.RootViewController <- new UINavigationController(mainViewController)
         this.Window.MakeKeyAndVisible()
-        ProlificTheme.Apply()
+        //ProlificTheme.Apply()
         true
 
 module Main = 

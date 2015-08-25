@@ -13,28 +13,30 @@ type ViewController () =
     inherit BaseViewController ()
 
     let height = nfloat 20.0
-    let filmListTable = new UITableView()
-            
-    let loadContent (view : UIView) (navController : UINavigationController) =
-        let filmButton = UIButton.FromType(UIButtonType.RoundedRect)
-        filmButton.SetTitle("Films", UIControlState.Normal)
-        filmButton.TouchUpInside.AddHandler
-            (fun _ _ ->
-                navController.PushViewController(new FilmListViewController(), true))
 
-        let sponsorButton = UIButton.FromType(UIButtonType.RoundedRect)
-        sponsorButton.SetTitle("Sponsors", UIControlState.Normal)
-        sponsorButton.TouchUpInside.AddHandler
+    let navButton title  (navController : UINavigationController) (controller : UIViewController) =
+        let button = UIButton.FromType(UIButtonType.RoundedRect)
+        button.SetTitle(title, UIControlState.Normal)
+
+        button.TouchUpInside.AddHandler
             (fun _ _ ->
-                navController.PushViewController(new SponsorListViewController(), true))
+                navController.PushViewController(controller, true))
+        button
+
+    let loadContent (navController : UINavigationController) =
+        let view = new BaseView()
+
+        let filmButton = navButton "Films" navController (new FilmListViewController())
+        let sponsorButton = navButton "Sponsors" navController (new SponsorListViewController())
 
         view.AddSubviews(filmButton, sponsorButton)
 
         let padding = nfloat 10.0
+        let topHeight = navController.NavigationBar.Frame.Size.Height + padding
 
         view.ConstrainLayout
             <@ [|
-                filmButton.Frame.Top = view.Frame.Top + padding
+                filmButton.Frame.Top = view.Frame.Top + topHeight
                 filmButton.Frame.Width = view.Frame.Width - padding
                 filmButton.Frame.Height = height
                 filmButton.Frame.CenterX = view.Frame.CenterX
@@ -44,6 +46,7 @@ type ViewController () =
                 sponsorButton.Frame.Height = height
                 sponsorButton.Frame.CenterX = view.Frame.CenterX
             |] @> |> ignore
+        view
 
     override x.DidReceiveMemoryWarning () =
         // Releases the view if it doesn't have a superview.
@@ -53,7 +56,7 @@ type ViewController () =
     override x.ViewDidLoad () =
         base.ViewDidLoad ()
         x.Title <- "2015 NLGLFF"
-        loadContent x.ContentView x.NavigationController
+        x.View <- loadContent x.NavigationController
 
     override x.ViewWillAppear animated =
         base.ViewWillAppear animated

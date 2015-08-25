@@ -118,6 +118,7 @@
     </Compile>
     <Compile Include="EasyLayout.fs" />
     <Compile Include="UIHelpers.fs" />
+    <Compile Include="BaseView.fs" />
     <Compile Include="BaseViewController.fs" />
     <Compile Include="FilmDetailViewController.fs" />
     <Compile Include="FilmsDataSource.fs" />
@@ -142,5 +143,7 @@
     <BundleResource Include="Resources\pace_logo.png" />
     <BundleResource Include="Resources\pace_logo%402x.png" />
     <BundleResource Include="Resources\pace_logo%403x.png" />
+    <BundleResource Include="Resources\background%402x.jpg" />
+    <BundleResource Include="Resources\background2%402x.jpg" />
   </ItemGroup>
 </Project>

@@ -13,8 +13,8 @@ type FilmListViewController() =
 
     let filmListTable = new UITableView()
 
-    let loadContent (view : UIView) =
-
+    let content =
+        let view = new UIView(BackgroundColor = UIColor.White)
         view.AddSubviews(filmListTable)
 
         let padding = nfloat 10.0
@@ -25,15 +25,17 @@ type FilmListViewController() =
                 filmListTable.Frame.Width = view.Frame.Width - padding
                 filmListTable.Frame.Bottom = view.Frame.Bottom
             |] @> |> ignore
+        view
 
     override x.ViewDidLoad () =
         base.ViewDidLoad ()
         x.Title <- "Selected Films"
+        x.View <- content
 
         filmListTable.Source <- new FilmsDataSource(Nlglff.Api.loadFilms(), x.NavigationController)
         filmListTable.ReloadData()
 
-        loadContent x.ContentView
+
 
     override x.ViewWillAppear animated =
         base.ViewWillAppear animated
