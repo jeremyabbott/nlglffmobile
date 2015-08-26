@@ -16,17 +16,23 @@ type SponsorListViewController() =
     let content topHeight =
         let view = new BaseView()
 
-        view.AddSubviews(sponsorListTable)
+        let header = new UILabel(Text = "NLGLFF Sponsors", TextAlignment = UITextAlignment.Center)
+        header.Font <- UIFont.FromName("HelveticaNeue-Medium", nfloat 24.0)
+        header.TextColor <- UIColor.White
+        view.AddSubviews(header, sponsorListTable)
 
         sponsorListTable.BackgroundColor <- UIColor.Clear
 
-        let padding = nfloat 10.0
-
         view.ConstrainLayout
             <@ [|
+                header.Frame.Height = topHeight
+                header.Frame.Width = view.Frame.Width
+                header.Frame.Top = view.Frame.Top
+                header.Frame.CenterX = view.Frame.CenterX
+
                 sponsorListTable.Frame.Top = view.Frame.Top + topHeight
                 sponsorListTable.Frame.Width = view.Frame.Width
-                sponsorListTable.Frame.Bottom = view.Frame.Bottom
+                sponsorListTable.Frame.Bottom = view.Frame.Bottom - topHeight
             |] @> |> ignore
         view
 
