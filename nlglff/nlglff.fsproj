@@ -120,6 +120,7 @@
     <Compile Include="UIHelpers.fs" />
     <Compile Include="BaseView.fs" />
     <Compile Include="BaseViewController.fs" />
+    <Compile Include="BaseUITableViewCell.fs" />
     <Compile Include="FilmDetailViewController.fs" />
     <Compile Include="FilmsDataSource.fs" />
     <Compile Include="FilmListViewController.fs" />

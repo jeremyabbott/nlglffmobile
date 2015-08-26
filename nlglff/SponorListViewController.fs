@@ -36,7 +36,7 @@ type SponsorListViewController() =
 
         x.View <- (content topHeight)
         x.NavigationController.NavigationBarHidden <- true
-        x.NavigationController.HidesBarsOnTap <- true
+        x.NavigationController.HidesBarsOnSwipe <- true
 
         sponsorListTable.Source <- new FilmsDataSource(Nlglff.Api.loadFilms(), x.NavigationController)
         sponsorListTable.ReloadData()
