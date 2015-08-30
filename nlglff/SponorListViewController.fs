@@ -1,6 +1,7 @@
 ﻿namespace nlglff
 
 open System
+open System.Collections.Generic
 open EasyLayout
 open Foundation
 open UIKit
@@ -50,7 +51,15 @@ type SponsorListViewController() =
     override x.ViewWillAppear animated =
         base.ViewWillAppear animated
 
-        let sponsors = Nlglff.Api.loadSponsors() |> Array.filter (fun s -> s.Year = 2015)
+        let sponsors =
+            let sponsorDict = Dictionary<string, Sponsor array>()
+
+            Nlglff.Api.loadSponsors()
+            |> Array.filter (fun s -> s.Year = 2015) 
+            |> Array.toSeq 
+            |> Seq.groupBy (fun (index : Sponsor) -> index.LevelDescription)
+            |> Seq.iter (fun g -> sponsorDict.Add(fst g, (Seq.toArray (snd g))))
+            sponsorDict
              
         sponsorListTable.Source <- new SponsorsDataSource(sponsors)
         sponsorListTable.ReloadData()
