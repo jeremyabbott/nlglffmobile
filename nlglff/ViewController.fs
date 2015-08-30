@@ -32,11 +32,11 @@ type ViewController () =
         view.AddSubviews(filmButton, sponsorButton)
 
         let padding = nfloat 10.0
-        let topHeight = navController.NavigationBar.Frame.Size.Height + padding
+
 
         view.ConstrainLayout
             <@ [|
-                filmButton.Frame.Top = view.Frame.Top + topHeight
+                filmButton.Frame.Top = view.Frame.Top
                 filmButton.Frame.Width = view.Frame.Width - padding
                 filmButton.Frame.Height = height
                 filmButton.Frame.CenterX = view.Frame.CenterX

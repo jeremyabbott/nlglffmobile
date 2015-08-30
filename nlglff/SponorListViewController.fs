@@ -40,11 +40,9 @@ type SponsorListViewController() =
 
     override x.ViewDidLoad () =
         base.ViewDidLoad ()
-        let topHeight = x.NavigationController.NavigationBar.Frame.Size.Height + (nfloat 20.0)
+        let topHeight = x.TabBarController.TabBar.Frame.Size.Height + (nfloat 20.0)
 
         x.View <- (content topHeight)
-        x.NavigationController.NavigationBarHidden <- true
-        x.NavigationController.HidesBarsOnSwipe <- true
 
         sponsorListTable.Source <- new FilmsDataSource(Nlglff.Api.loadFilms(), x.NavigationController)
         sponsorListTable.ReloadData()

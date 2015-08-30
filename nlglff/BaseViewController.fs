@@ -17,8 +17,8 @@ type BaseViewController () =
     override x.ViewDidLoad () =
         base.ViewDidLoad ()
 
-        x.NavigationController.NavigationBar.Translucent <- true
-        x.NavigationController.NavigationBar.BarStyle <- UIBarStyle.BlackOpaque
+        x.TabBarController.TabBar.Translucent <- true
+        x.TabBarController.TabBar.BarStyle <- UIBarStyle.BlackOpaque
 
     override x.ViewWillAppear animated =
         base.ViewWillAppear animated
