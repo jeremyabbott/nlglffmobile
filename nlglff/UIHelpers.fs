@@ -6,6 +6,9 @@ open EasyLayout
 open Foundation
 open UIKit
 
+
+let DarkGray = (UIColor.DarkGray).ColorWithAlpha(nfloat 0.25)
+
 let getFooter () =
 
     let padding = nfloat 10.0
@@ -63,4 +66,20 @@ let getHeader () =
 
             view.Frame.Height = height
         |] @> |> ignore
+    view
+
+let getSectionHeader text =
+    let view = new UIView(Opaque = true)
+    let label = new UILabel(TextColor = UIColor.White, BackgroundColor = DarkGray, TextAlignment = UITextAlignment.Center)
+    label.Font <- UIFont.FromName("HelveticaNeue-Medium", nfloat 20.0)
+    label.Text <- text
+
+    view.AddSubview label
+
+    view.ConstrainLayout
+        <@ [|
+            label.Frame.Width = view.Frame.Width
+            label.Frame.Height = view.Frame.Height
+        |] @> |> ignore
+
     view

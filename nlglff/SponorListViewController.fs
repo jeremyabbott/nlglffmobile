@@ -23,6 +23,7 @@ type SponsorListViewController() =
         view.AddSubviews(header, sponsorListTable)
 
         sponsorListTable.BackgroundColor <- UIColor.Clear
+        sponsorListTable.SeparatorStyle <- UITableViewCellSeparatorStyle.None
 
         view.ConstrainLayout
             <@ [|

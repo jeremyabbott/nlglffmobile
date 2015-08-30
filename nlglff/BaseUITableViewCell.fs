@@ -11,3 +11,4 @@ type BaseUITableViewCell(cellId : string) as x =
         x.TextLabel.Font <- UIFont.FromName("HelveticaNeue-Medium", nfloat 14.0)
         x.TextLabel.BackgroundColor <- (UIColor.DarkGray).ColorWithAlpha(nfloat 0.25)
         x.BackgroundColor <- (UIColor.DarkGray).ColorWithAlpha(nfloat 0.25)
+        x.TextLabel.TextAlignment <- UITextAlignment.Center

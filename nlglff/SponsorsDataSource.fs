@@ -3,8 +3,11 @@
 open System
 open System.Collections.Generic
 open System.Linq
+open CoreGraphics
+open EasyLayout
 open Foundation
 open Nlglff.Api
+open UIHelpers
 open UIKit
 
 type SponsorsDataSource(sponsors : Dictionary<string, Sponsor array>) =
@@ -24,6 +27,9 @@ type SponsorsDataSource(sponsors : Dictionary<string, Sponsor array>) =
         let row = indexPath.Row
         cell.TextLabel.Text <- sponsors.[levelKey].[row].DisplayName
         cell
+
+    override x.GetViewForHeader (tableView, section) =
+        getSectionHeader sponsorLevels.[int section]
 
     override x.NumberOfSections (tableView) = nint sponsors.Keys.Count
 
