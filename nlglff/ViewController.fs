@@ -12,40 +12,11 @@ open UIKit
 type ViewController () =
     inherit BaseViewController ()
 
-    let height = nfloat 20.0
-
-    let navButton title  (navController : UINavigationController) (controller : UIViewController) =
-        let button = UIButton.FromType(UIButtonType.RoundedRect)
-        button.SetTitle(title, UIControlState.Normal)
-
-        button.TouchUpInside.AddHandler
-            (fun _ _ ->
-                navController.PushViewController(controller, true))
-        button
-
-    let loadContent (navController : UINavigationController) =
+ 
+    let loadContent () =
         let view = new BaseView()
 
-        let filmButton = navButton "Films" navController (new FilmListViewController())
-        let sponsorButton = navButton "Sponsors" navController (new SponsorListViewController())
 
-        view.AddSubviews(filmButton, sponsorButton)
-
-        let padding = nfloat 10.0
-
-
-        view.ConstrainLayout
-            <@ [|
-                filmButton.Frame.Top = view.Frame.Top
-                filmButton.Frame.Width = view.Frame.Width - padding
-                filmButton.Frame.Height = height
-                filmButton.Frame.CenterX = view.Frame.CenterX
-
-                sponsorButton.Frame.Top = filmButton.Frame.Bottom + padding
-                sponsorButton.Frame.Width = filmButton.Frame.Width - padding
-                sponsorButton.Frame.Height = height
-                sponsorButton.Frame.CenterX = view.Frame.CenterX
-            |] @> |> ignore
         view
 
     override x.DidReceiveMemoryWarning () =
@@ -56,7 +27,7 @@ type ViewController () =
     override x.ViewDidLoad () =
         base.ViewDidLoad ()
         x.Title <- "2015 NLGLFF"
-        x.View <- loadContent x.NavigationController
+        x.View <- loadContent ()
 
     override x.ViewWillAppear animated =
         base.ViewWillAppear animated
