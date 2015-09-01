@@ -103,10 +103,9 @@
   </ItemGroup>
   <ItemGroup>
     <ImageAsset Include="Resources\Images.xcassets\AppIcons.appiconset\Contents.json" />
-    <ImageAsset Include="Resources\brand_logo.png" />
   </ItemGroup>
   <ItemGroup>
-    <InterfaceDefinition Include="Resources\LaunchScreen.xib" />
+    <InterfaceDefinition Include="LaunchScreen.storyboard" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Info.plist" />
@@ -143,10 +142,11 @@
     <BundleResource Include="Resources\brand_logo%402x.png" />
     <BundleResource Include="Resources\brand_logo%403x.png" />
     <BundleResource Include="Resources\FilmDetailViewController.fs" />
-    <BundleResource Include="Resources\pace_logo.png" />
     <BundleResource Include="Resources\pace_logo%402x.png" />
     <BundleResource Include="Resources\pace_logo%403x.png" />
     <BundleResource Include="Resources\background%402x.jpg" />
     <BundleResource Include="Resources\background2%402x.jpg" />
+    <BundleResource Include="Resources\brand_logo_horizontal%403x.png" />
+    <BundleResource Include="Resources\brand_logo_horizontal%402x.png" />
   </ItemGroup>
 </Project>

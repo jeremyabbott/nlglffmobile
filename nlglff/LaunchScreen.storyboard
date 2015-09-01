@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6206.8" systemVersion="13A451" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="7">
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7026.1"/>
+    </dependencies>
+    <scenes>
+        <scene sceneID="6">
+            <objects>
+                <viewController id="7" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="4"/>
+                        <viewControllerLayoutGuide type="bottom" id="5"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="8">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="center" id="47" translatesAutoresizingMaskIntoConstraints="NO" image="brand_logo_horizontal.png" misplaced="YES">
+                                <rect key="frame" x="118" y="105" width="364" height="390"/>
+                            </imageView>
+                        </subviews>
+                        <constraints>
+                            <constraint firstItem="47" firstAttribute="centerX" secondItem="8" secondAttribute="centerX" constant="0.0" id="68"/>
+                            <constraint firstItem="47" firstAttribute="centerY" secondItem="8" secondAttribute="centerY" constant="0.0" id="69"/>
+                        </constraints>
+                    </view>
+                    <simulatedStatusBarMetrics key="simulatedStatusBarMetrics" statusBarStyle="lightContent"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="9" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="287" y="25"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="brand_logo.png" width="400" height="102"/>
+        <image name="pace_logo.png" width="150" height="149"/>
+        <image name="background.jpg" width="750" height="1334"/>
+        <image name="background2.jpg" width="750" height="1334"/>
+        <image name="brand_logo_horizontal.png" width="320" height="351"/>
+    </resources>
+</document>
