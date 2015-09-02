@@ -6,8 +6,11 @@ open EasyLayout
 open Foundation
 open UIKit
 
-
 let DarkGray = (UIColor.DarkGray).ColorWithAlpha(nfloat 0.25)
+let LogoBrown = UIColor.FromRGB(55, 39, 21)
+let LogoCream = UIColor.FromRGB(255, 254, 223)
+let LogoGreen = UIColor.FromRGB(144, 209, 198)
+let LogoPink = UIColor.FromRGB(242, 155, 194)
 
 let getFooter () =
 
