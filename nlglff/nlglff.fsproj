@@ -116,7 +116,9 @@
     <Compile Include="Nlglff.fs">
     </Compile>
     <Compile Include="EasyLayout.fs" />
-    <Compile Include="UIHelpers.fs" />
+    <Compile Include="UIHelpers.fs">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Compile>
     <Compile Include="BaseView.fs" />
     <Compile Include="BaseViewController.fs" />
     <Compile Include="BaseUITableViewCell.fs" />
@@ -148,7 +150,11 @@
     <BundleResource Include="Resources\brand_logo_horizontal%403x.png" />
     <BundleResource Include="Resources\brand_logo_horizontal%402x.png" />
     <BundleResource Include="Resources\logo_long%403x.jpg" />
-    <BundleResource Include="Resources\Oswald-Bold.ttf" />
-    <BundleResource Include="Resources\brandon_re.ttf" />
+    <BundleResource Include="Resources\Oswald-Bold.ttf">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </BundleResource>
+    <BundleResource Include="Resources\brandon_re.ttf">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </BundleResource>
   </ItemGroup>
 </Project>

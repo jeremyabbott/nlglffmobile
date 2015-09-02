@@ -32,5 +32,10 @@
 	</array>
 	<key>XSAppIconAssets</key>
 	<string>Resources/Images.xcassets/AppIcons.appiconset</string>
+	<key>UIAppFonts</key>
+	<array>
+		<string>Oswald-Bold.ttf</string>
+		<string>brandon_re.ttf</string>
+	</array>
 </dict>
 </plist>

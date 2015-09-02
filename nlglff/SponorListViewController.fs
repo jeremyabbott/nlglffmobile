@@ -14,18 +14,15 @@ type SponsorListViewController() =
 
     let sponsorListTable = new UITableView()
 
-    let content topHeight =
+    let content navHeight =
         let view = new BaseView()
         let height = (nfloat 0.1) * UIScreen.MainScreen.Bounds.Height
         let padding = (nfloat 0.25) * height
+        let topHeight = UIApplication.SharedApplication.StatusBarFrame.Height
 
         let headerImgView = new UIImageView(UIImage.FromFile("logo_long.jpg"))
-        let headerLabel = new UILabel(Text = "Sponsors", TextAlignment = UITextAlignment.Center)
-        headerLabel.Font <- UIFont.FromName("HelveticaNeue-Medium", nfloat 36.0)
-        headerLabel.TextColor <- UIColor.Black
-        headerLabel.AdjustsFontSizeToFitWidth <- true
 
-        view.AddSubviews(headerImgView, headerLabel, sponsorListTable)
+        view.AddSubviews(headerImgView, sponsorListTable)
 
         sponsorListTable.BackgroundColor <- UIColor.Clear
         sponsorListTable.SeparatorStyle <- UITableViewCellSeparatorStyle.None
@@ -35,24 +32,19 @@ type SponsorListViewController() =
         view.ConstrainLayout
             <@ [|
                 headerImgView.Frame.Top = view.Frame.Top + topHeight
-                headerImgView.Frame.Left = view.Frame.Left
+                headerImgView.Frame.CenterX = view.Frame.CenterX
 
-                headerLabel.Frame.Height = headerImgView.Frame.Height
-                headerLabel.Frame.Width = view.Frame.Width - headerImgViewWidth
-                headerLabel.Frame.Bottom = headerImgView.Frame.Bottom
-                headerLabel.Frame.Left = headerImgView.Frame.Right
-
-                sponsorListTable.Frame.Top = headerLabel.Frame.Bottom + padding
+                sponsorListTable.Frame.Top = headerImgView.Frame.Bottom + padding
                 sponsorListTable.Frame.Width = view.Frame.Width
-                sponsorListTable.Frame.Bottom = view.Frame.Bottom - topHeight
+                sponsorListTable.Frame.Bottom = view.Frame.Bottom - navHeight
             |] @> |> ignore
         view
 
     override x.ViewDidLoad () =
         base.ViewDidLoad ()
-        let topHeight = UIApplication.SharedApplication.StatusBarFrame.Height
+        let navHeight = x.TabBarController.TabBar.Frame.Height
 
-        x.View <- (content topHeight)
+        x.View <- (content navHeight)
 
         sponsorListTable.Source <- new FilmsDataSource(Nlglff.Api.loadFilms(), x.NavigationController)
         sponsorListTable.ReloadData()
