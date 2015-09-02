@@ -16,10 +16,7 @@ type SponsorListViewController() =
 
     let content navHeight =
         let view = new BaseView()
-        let height = (nfloat 0.1) * UIScreen.MainScreen.Bounds.Height
-        let padding = (nfloat 0.25) * height
         let topHeight = UIApplication.SharedApplication.StatusBarFrame.Height
-
         let headerImgView = new UIImageView(UIImage.FromFile("logo_long.jpg"))
 
         view.AddSubviews(headerImgView, sponsorListTable)
@@ -27,14 +24,12 @@ type SponsorListViewController() =
         sponsorListTable.BackgroundColor <- UIColor.Clear
         sponsorListTable.SeparatorStyle <- UITableViewCellSeparatorStyle.None
 
-
-        let headerImgViewWidth = headerImgView.Frame.Width
         view.ConstrainLayout
             <@ [|
                 headerImgView.Frame.Top = view.Frame.Top + topHeight
                 headerImgView.Frame.CenterX = view.Frame.CenterX
 
-                sponsorListTable.Frame.Top = headerImgView.Frame.Bottom + padding
+                sponsorListTable.Frame.Top = headerImgView.Frame.Bottom + topHeight
                 sponsorListTable.Frame.Width = view.Frame.Width
                 sponsorListTable.Frame.Bottom = view.Frame.Bottom - navHeight
             |] @> |> ignore
@@ -45,9 +40,6 @@ type SponsorListViewController() =
         let navHeight = x.TabBarController.TabBar.Frame.Height
 
         x.View <- (content navHeight)
-
-        sponsorListTable.Source <- new FilmsDataSource(Nlglff.Api.loadFilms(), x.NavigationController)
-        sponsorListTable.ReloadData()
 
     override x.ViewWillAppear animated =
         base.ViewWillAppear animated
