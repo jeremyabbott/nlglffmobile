@@ -4,10 +4,9 @@ open System
 open System.Collections.Generic
 open EasyLayout
 open Foundation
-open UIKit
 open Nlglff.Api
-open WebKit
-open CoreGraphics
+open UIHelpers
+open UIKit
 
 type SponsorListViewController() = 
     inherit BaseViewController()
@@ -21,7 +20,7 @@ type SponsorListViewController() =
 
         view.AddSubviews(headerImgView, sponsorListTable)
 
-        sponsorListTable.BackgroundColor <- UIColor.Clear
+        sponsorListTable.BackgroundColor <- LogoPink
         sponsorListTable.SeparatorStyle <- UITableViewCellSeparatorStyle.None
 
         view.ConstrainLayout

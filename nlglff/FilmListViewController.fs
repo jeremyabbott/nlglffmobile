@@ -41,11 +41,12 @@ type FilmListViewController() =
 
     override x.ViewDidLoad () =
         base.ViewDidLoad ()
+
         x.Title <- "Selected Films"
         x.View <- (getContent x.TabBarController.TabBar.Frame.Height)
 
     override x.ViewWillAppear animated =
         base.ViewWillAppear animated
 
-        filmListTable.Source <- new FilmsDataSource(Nlglff.Api.loadFilms(), x.TabBarController)
+        filmListTable.Source <- new FilmsDataSource(Nlglff.Api.loadFilms(), x.NavigationController)
         filmListTable.ReloadData()

@@ -14,12 +14,9 @@ type AppDelegate () =
     // This method is invoked when the application is ready to run.
     override this.FinishedLaunching (app, options) =
         this.Window <- new UIWindow(UIScreen.MainScreen.Bounds)
-        //let mainViewController = new ViewController()
 
-        //this.Window.RootViewController <- new UINavigationController(mainViewController)
         this.Window.RootViewController <- new TabController()
         this.Window.MakeKeyAndVisible()
-        //ProlificTheme.Apply()
         true
 
 module Main = 

@@ -18,7 +18,7 @@ type FilmDetailViewController(film: Film) =
     let labelWidth = nfloat 65.0
     let padding = nfloat 15.0
     let trailerHeight = (nfloat 9.0) / (nfloat 16.0)
-
+    (*
     let getTrailerViewForFilm (film : Film) (view : UIView) =
         let view = new WKWebView(view.Frame, new WKWebViewConfiguration())
 
@@ -80,9 +80,9 @@ type FilmDetailViewController(film: Film) =
                 showtimes.Frame.Height = eighty
                 showtimes.Frame.Width = view.Frame.Width - padding
             |] @> |> ignore
-        view
+        view*)
 
     override x.ViewDidLoad () =
         base.ViewDidLoad ()
         x.Title <- film.Name
-        x.View <- content
+        //x.View <- content

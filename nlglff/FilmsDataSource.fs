@@ -5,7 +5,7 @@ open Foundation
 open Nlglff.Api
 open UIKit
 
-type FilmsDataSource(filmSource: Film array, navigation: UITabBarController) =
+type FilmsDataSource(filmSource: Film array, navigation: UINavigationController) =
     inherit UITableViewSource()
 
     let cellIdentifier = "FilmCell"
@@ -25,4 +25,4 @@ type FilmsDataSource(filmSource: Film array, navigation: UITabBarController) =
 
     override x.RowSelected (tableView, indexPath) = 
         tableView.DeselectRow (indexPath, false)
-        //navigation.PushViewController (new FilmDetailViewController(filmSource.[int indexPath.Item]), true)
+        navigation.PushViewController (new FilmDetailViewController(filmSource.[int indexPath.Item]), false)
