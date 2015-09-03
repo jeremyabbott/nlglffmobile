@@ -17,7 +17,7 @@ type FilmListViewController() =
         let view = new UIView(BackgroundColor = UIColor.White)
 
         filmListTable.TableFooterView <- new UIView(CGRect.Empty) // hides the footer and thus empty cells
-        filmListTable.SeparatorColor <- LogoGreen
+        filmListTable.SeparatorStyle <- UITableViewCellSeparatorStyle.None
 
         let headerImgView = new UIImageView(UIImage.FromFile("logo_long.jpg"))
         let height = UIScreen.MainScreen.Bounds.Height
@@ -25,8 +25,6 @@ type FilmListViewController() =
         let topHeight = UIApplication.SharedApplication.StatusBarFrame.Height
         let tableHeight = height - (headerImgView.Frame.Height + tabBarHeight)
         view.AddSubviews(headerImgView, filmListTable)
-
-
 
         view.ConstrainLayout
             <@ [|
@@ -48,5 +46,5 @@ type FilmListViewController() =
     override x.ViewWillAppear animated =
         base.ViewWillAppear animated
 
-        filmListTable.Source <- new FilmsDataSource(Nlglff.Api.loadFilms(), x.NavigationController)
+        filmListTable.Source <- new FilmsDataSource(Nlglff.Api.loadFilms(), x)
         filmListTable.ReloadData()

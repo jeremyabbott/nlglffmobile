@@ -10,4 +10,4 @@ type BaseView() as x =
 
     do
         x.BackgroundColor <- UIColor.White
-    
+   

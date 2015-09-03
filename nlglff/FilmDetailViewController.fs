@@ -8,8 +8,8 @@ open Nlglff.Api
 open WebKit
 open CoreGraphics
 
-type FilmDetailViewController(film: Film) = 
-    inherit BaseViewController()
+type FilmDetailViewController(film: Film) as x = 
+    inherit UIViewController()
 
     let adjustment = nfloat 4.0
     let eighty = nfloat 80.0
@@ -18,7 +18,7 @@ type FilmDetailViewController(film: Film) =
     let labelWidth = nfloat 65.0
     let padding = nfloat 15.0
     let trailerHeight = (nfloat 9.0) / (nfloat 16.0)
-    (*
+
     let getTrailerViewForFilm (film : Film) (view : UIView) =
         let view = new WKWebView(view.Frame, new WKWebViewConfiguration())
 
@@ -46,7 +46,11 @@ type FilmDetailViewController(film: Film) =
 
         let trailer = getTrailerViewForFilm film view
 
-        view.AddSubviews(title, synopsisLabel, synopsis, showtimeLabel, showtimes, trailer)
+        let backButton = UIButton.FromType(UIButtonType.RoundedRect)
+        backButton.SetTitle("Back to Films List", UIControlState.Normal)
+        backButton.TouchUpInside.Add <| fun _ -> x.DismissViewController(false, null)
+
+        view.AddSubviews(title, synopsisLabel, synopsis, showtimeLabel, showtimes, trailer, backButton)
 
         view.ConstrainLayout
             <@ [|
@@ -79,10 +83,13 @@ type FilmDetailViewController(film: Film) =
                 showtimes.Frame.Left = showtimeLabel.Frame.Right + padding
                 showtimes.Frame.Height = eighty
                 showtimes.Frame.Width = view.Frame.Width - padding
+
+                backButton.Frame.Top = showtimeLabel.Frame.Bottom + padding
+                backButton.Frame.CenterX = view.Frame.CenterX
             |] @> |> ignore
-        view*)
+        view
 
     override x.ViewDidLoad () =
         base.ViewDidLoad ()
         x.Title <- film.Name
-        //x.View <- content
+        x.View <- content

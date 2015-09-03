@@ -13,16 +13,7 @@ type BaseViewController () =
         // Releases the view if it doesn't have a superview.
         base.DidReceiveMemoryWarning ()
         // Release any cached data, images, etc that aren't in use.
-
-    override x.ViewDidLoad () =
-        base.ViewDidLoad ()
-
-        x.TabBarController.TabBar.Translucent <- true
-        x.TabBarController.TabBar.BarStyle <- UIBarStyle.BlackOpaque
-
-    override x.ViewWillAppear animated =
-        base.ViewWillAppear animated
-
+    
     override x.ShouldAutorotateToInterfaceOrientation (toInterfaceOrientation) =
         // Return true for supported orientations
         if UIDevice.CurrentDevice.UserInterfaceIdiom = UIUserInterfaceIdiom.Phone then
