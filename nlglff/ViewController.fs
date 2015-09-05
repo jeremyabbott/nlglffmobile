@@ -2,6 +2,8 @@
 
 open Foundation
 open UIKit
+open EasyLayout
+open UIHelpers
 
 [<Register("ViewController")>]
 type ViewController () =
@@ -9,6 +11,17 @@ type ViewController () =
  
     let loadContent () =
         let view = new BaseView()
+        let imgView = loadImageView "date_logo.png"
+
+        view.AddSubviews(imgView)
+
+        view.ConstrainLayout
+            <@ [|
+                imgView.Frame.Top = view.Frame.Top + topHeight
+                imgView.Frame.CenterX = view.Frame.CenterX
+
+            |] @> |> ignore
+
         view
 
     override x.DidReceiveMemoryWarning () =
