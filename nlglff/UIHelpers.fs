@@ -13,6 +13,7 @@ let LogoPink = UIColor.FromRGB(242, 155, 194)
 let FontBrandon = "BrandonGrotesque-Regular"
 let FontOswald = "Oswald"
 
+let loadImageView fileName = new UIImageView(UIImage.FromFile(fileName))
 let getFooter () =
 
     let padding = nfloat 10.0

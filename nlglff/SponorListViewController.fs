@@ -16,7 +16,7 @@ type SponsorListViewController() =
     let content navHeight =
         let view = new BaseView()
         let topHeight = UIApplication.SharedApplication.StatusBarFrame.Height
-        let headerImgView = new UIImageView(UIImage.FromFile("logo_long.jpg"))
+        let headerImgView = new UIImageView(UIImage.FromFile("brand_logo.png"))
 
         view.AddSubviews(headerImgView, sponsorListTable)
 

@@ -14,3 +14,6 @@ type BaseUITableViewCell(cellId : string) as x =
         x.TextLabel.BackgroundColor <- UIColor.White
         x.BackgroundColor <- LogoPink
         x.TextLabel.TextAlignment <- UITextAlignment.Center
+        x.PreservesSuperviewLayoutMargins <- false
+        x.SeparatorInset <- UIEdgeInsets.Zero
+        x.LayoutMargins <- UIEdgeInsets.Zero
