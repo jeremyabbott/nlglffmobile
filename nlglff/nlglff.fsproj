@@ -141,10 +141,6 @@
     </XamarinComponentReference>
   </ItemGroup>
   <ItemGroup>
-    <BundleResource Include="Resources\pace_logo%402x.png" />
-    <BundleResource Include="Resources\pace_logo%403x.png" />
-    <BundleResource Include="Resources\background%402x.jpg" />
-    <BundleResource Include="Resources\background2%402x.jpg" />
     <BundleResource Include="Resources\brand_logo_horizontal%403x.png" />
     <BundleResource Include="Resources\brand_logo_horizontal%402x.png" />
     <BundleResource Include="Resources\logo_long%403x.jpg" />
@@ -158,5 +154,9 @@
     <BundleResource Include="Resources\date_logo%402x.png" />
     <BundleResource Include="Resources\brand_logo%403x.png" />
     <BundleResource Include="Resources\brand_logo%402x.png" />
+    <BundleResource Include="Resources\brand_logo_films%402x.png" />
+    <BundleResource Include="Resources\brand_logo_films%403x.png" />
+    <BundleResource Include="Resources\brand_logo_sponsors%402x.png" />
+    <BundleResource Include="Resources\brand_logo_sponsors%403x.png" />
   </ItemGroup>
 </Project>

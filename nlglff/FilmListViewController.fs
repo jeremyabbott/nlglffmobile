@@ -19,9 +19,8 @@ type FilmListViewController() =
         filmListTable.TableFooterView <- new UIView(CGRect.Empty) // hides the footer and thus empty cells
         filmListTable.SeparatorStyle <- UITableViewCellSeparatorStyle.SingleLine
         filmListTable.SeparatorColor <- LogoGreen
-        //filmListTable.SeparatorInset <- UIEdgeInsets.Zero
 
-        let headerImgView = loadImageView "brand_logo.png"
+        let headerImgView = loadImageView "brand_logo_films.png"
 
         let height = UIScreen.MainScreen.Bounds.Height
         let padding = UIScreen.MainScreen.Bounds.Height
