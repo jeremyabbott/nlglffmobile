@@ -158,5 +158,11 @@
     <BundleResource Include="Resources\brand_logo_films%403x.png" />
     <BundleResource Include="Resources\brand_logo_sponsors%402x.png" />
     <BundleResource Include="Resources\brand_logo_sponsors%403x.png" />
+    <BundleResource Include="Resources\films%402x.png" />
+    <BundleResource Include="Resources\home%402x.png" />
+    <BundleResource Include="Resources\dollar%402x.png" />
+    <BundleResource Include="Resources\dollar%403x.png" />
+    <BundleResource Include="Resources\home%403x.png" />
+    <BundleResource Include="Resources\films%403x.png" />
   </ItemGroup>
 </Project>
