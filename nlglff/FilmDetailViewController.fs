@@ -40,7 +40,7 @@ type FilmDetailViewController(film: Film) as x =
                 title.Frame.Top = view.Frame.Top + padding
                 title.Frame.CenterX = view.Frame.CenterX
 
-                trailer.Frame.Top = title.Frame.Bottom + padding
+                trailer.Frame.Top = title.Frame.Bottom
                 trailer.Frame.CenterX = view.Frame.CenterX
                 trailer.Frame.Width = view.Frame.Width * adjustedWidth
                 trailer.Frame.Height = trailer.Frame.Width * widescreen

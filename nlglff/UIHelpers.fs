@@ -18,6 +18,7 @@ let topHeight = UIApplication.SharedApplication.StatusBarFrame.Height
 
 let loadImageView fileName = new UIImageView(UIImage.FromFile(fileName))
 
+
 let getSectionHeader text =
     let view = new UIView()
     let label = new UILabel(TextColor = UIColor.White, BackgroundColor = LogoGreen, TextAlignment = UITextAlignment.Center)
@@ -39,11 +40,26 @@ let getTrailerViewForFilm (film : Film) (size : CGRect) =
 
     let url =
         match film.TrailerUrl with
-        | Some u -> u
+        | Some u -> sprintf "http:%s" u
         | None -> String.Empty
-    
-    let request = new NSUrlRequest(new NSUrl(sprintf "http:%s?modestbranding=1" url))
-    view.LoadRequest(request) |> ignore
+
+    let html = sprintf "<iframe width=\"100%%\" height=\"100%%\" src=\"%s\" frameborder=\"0\" allowfullscreen/>" url
+    view.LoadHtmlString(new NSString(html), new NSUrl(url)) |> ignore
+    //let request = new NSUrlRequest(new NSUrl(sprintf "%s" url))
+    //view.LoadRequest(request) |> ignore
+    view
+
+let getTrailerViewForFilm' (film : Film) (size : CGRect) =
+    let view = new UIWebView(size)
+    let url =
+        match film.TrailerUrl with
+        | Some u -> sprintf "http:%s" u
+        | None -> String.Empty
+
+    let html = sprintf "<iframe width=\"100%%\" height=\"100%%\" src=\"%s\" frameborder=\"0\"/>" url
+    view.LoadHtmlString(html, null) |> ignore
+    //let request = new NSUrlRequest(new NSUrl(sprintf "http:%s?modestbranding=1" url))
+    //view.LoadRequest(request) |> ignore
     view
 
 // shuffle an array (in-place)
