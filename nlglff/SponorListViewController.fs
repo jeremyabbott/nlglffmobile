@@ -45,8 +45,7 @@ type SponsorListViewController() =
         let sponsors =
             let sponsorDict = Dictionary<string, Sponsor array>()
 
-            Nlglff.Api.loadSponsors()
-            |> Array.filter (fun s -> s.Year = 2015) 
+            sponsorsForYear 2015
             |> Array.toSeq 
             |> Seq.groupBy (fun (index : Sponsor) -> index.LevelDescription)
             |> Seq.iter (fun g -> sponsorDict.Add(fst g, (Seq.toArray (snd g))))

@@ -35,6 +35,9 @@ let loadFilms = memoize "films" (fun () ->
 let loadSponsors = memoize "sponsors" (fun () ->
     Sponsors.Load(sponsorsUrl))
 
+let sponsorsForYear year =
+    loadSponsors () |> Array.filter (fun s -> s.Year = 2015)
+
 let getDateTime (s: Showtime) =
     new DateTime (s.Date.Year, s.Date.Month, s.Date.Day, s.Time.Hour, s.Time.Minute, 0)
   

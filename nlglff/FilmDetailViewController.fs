@@ -1,12 +1,13 @@
 ﻿namespace nlglff
 
 open System
+open CoreGraphics
 open EasyLayout
 open Foundation
 open UIKit
 open Nlglff.Api
 open WebKit
-open CoreGraphics
+open UIHelpers
 
 type FilmDetailViewController(film: Film) as x = 
     inherit UIViewController()
@@ -19,18 +20,6 @@ type FilmDetailViewController(film: Film) as x =
     let padding = nfloat 15.0
     let trailerHeight = (nfloat 9.0) / (nfloat 16.0)
 
-    let getTrailerViewForFilm (film : Film) (view : UIView) =
-        let view = new WKWebView(view.Frame, new WKWebViewConfiguration())
-
-        let url =
-            match film.TrailerUrl with
-            | Some u -> u
-            | None -> String.Empty
-        
-        let request = new NSUrlRequest(new NSUrl(sprintf "http:%s" url))
-        view.LoadRequest(request) |> ignore
-        view
-    
     let content =
         let view = new UIView(BackgroundColor = UIColor.White)
         let title = new UILabel(Text = film.Name, TextAlignment = UITextAlignment.Center)
@@ -44,7 +33,7 @@ type FilmDetailViewController(film: Film) as x =
         
         let showtimes = new UITextView(Text = showtimeText, Editable = false)
 
-        let trailer = getTrailerViewForFilm film view
+        let trailer = getTrailerViewForFilm film view.Frame
 
         let backButton = UIButton.FromType(UIButtonType.RoundedRect)
         backButton.SetTitle("Back to Films List", UIControlState.Normal)
