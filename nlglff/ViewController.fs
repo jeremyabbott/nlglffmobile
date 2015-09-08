@@ -109,7 +109,6 @@ type ViewController () =
         let view = new BaseView()
         let logoButton = UIButton.FromType(UIButtonType.Custom)
         logoButton.SetImage(UIImage.FromFile("brand_logo.png"), UIControlState.Normal)
-        logoButton.TranslatesAutoresizingMaskIntoConstraints <- false
 
 
 
@@ -117,7 +116,7 @@ type ViewController () =
         let contentWidth = UIScreen.MainScreen.Bounds.Width
         view.AddSubview logoButton
         let leading = nfloat 5.
-        view.AddConstraints [|logoButton.LayoutLeading == view.LayoutLeading + leading
+        addConstraints view [|logoButton.LayoutLeading == view.LayoutLeading + leading
                               logoButton.LayoutCenterX == view.LayoutCenterX
                               logoButton.LayoutTop == view.LayoutTop + topHeight|]
         (*

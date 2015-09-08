@@ -16,15 +16,9 @@ let FontBrandon = "BrandonGrotesque-Regular"
 let FontOswald = "Oswald"
 let topHeight = UIApplication.SharedApplication.StatusBarFrame.Height
 
-let createEqualConstraint childAttribute parentAttribute child parent modifier =
-    NSLayoutConstraint.Create(child, childAttribute, NSLayoutRelation.Equal, parent, parentAttribute, nfloat 1., modifier)
-   
-let createBottomConstraint (child: UIView) (parent: UIView) (modifier: nfloat) =
-    createEqualConstraint NSLayoutAttribute.Bottom NSLayoutAttribute.Bottom child parent modifier
-
-let createTopConstraint (child: UIView) (parent: UIView) (modifier: nfloat) =
-    createEqualConstraint NSLayoutAttribute.Top NSLayoutAttribute.Top child parent modifier
-
+let addConstraints (view : UIView) constraints =
+    view.AddConstraints constraints
+    Array.iter (fun (v : UIView) -> v.TranslatesAutoresizingMaskIntoConstraints <- false) view.Subviews
 
 let loadImageView fileName = new UIImageView(UIImage.FromFile(fileName))
 
