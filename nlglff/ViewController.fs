@@ -105,12 +105,14 @@ type ViewController () =
     *)
 
         
-    let content =
+    let content (viewController : UIViewController) =
         let view = new BaseView()
         let logoButton = UIButton.FromType(UIButtonType.Custom)
         logoButton.SetImage(UIImage.FromFile("brand_logo.png"), UIControlState.Normal)
+        let alert = alertAboutPace()
+        alert.AddAction(UIAlertAction.Create("Thanks!", UIAlertActionStyle.Default, fun _ -> "fuck" |> ignore))
 
-
+        logoButton.TouchUpInside.Add <| fun _ -> viewController.PresentViewController(alert, true, null)
 
 
         let contentWidth = UIScreen.MainScreen.Bounds.Width
@@ -148,7 +150,7 @@ type ViewController () =
     override x.ViewDidLoad () =
         base.ViewDidLoad ()
         x.Title <- "2015 NLGLFF"
-        x.View <- content
+        x.View <- content x
 
     override x.ViewDidAppear (animated) =
         base.ViewDidAppear(animated)
