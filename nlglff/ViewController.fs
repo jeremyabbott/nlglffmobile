@@ -21,7 +21,6 @@ type ViewController () =
         let alert = UIAlertController.Create("About the NLGLFF", aboutPace, UIAlertControllerStyle.Alert)
         alert
 
-
     let nextUpView =
         let widescreen = nfloat 9. / nfloat 16.
 
@@ -44,14 +43,15 @@ type ViewController () =
         view.AddSubviews (filmLabel, trailer)
         filmLabel.SizeToFit()
 
+        view.AddConstraint(createTopConstraint filmLabel view padding)
+        view.AddConstraint(createBottomConstraint trailer view (padding * nfloat -1.))
+        view.AddConstraint(createEqualConstraint NSLayoutAttribute.Bottom NSLayoutAttribute.Top filmLabel trailer (nfloat 0.))
+
         view.ConstrainLayout
             <@ [|
-                filmLabel.Frame.Top = view.Frame.Top + padding
                 filmLabel.Frame.CenterX = view.Frame.CenterX
                 filmLabel.Frame.Width = view.Frame.Width
-                filmLabel.Frame.Bottom = trailer.Frame.Top
 
-                trailer.Frame.Bottom = view.Frame.Bottom - padding
                 trailer.Frame.CenterX = view.Frame.CenterX
                 trailer.Frame.Width = view.Frame.Width * adjustedWidth
                 trailer.Frame.Height = view.Frame.Width * widescreen
@@ -80,29 +80,34 @@ type ViewController () =
             new UITextView(Text = sponsorsText, Editable = false, BackgroundColor = LogoPink, TextColor = UIColor.White, TextAlignment = UITextAlignment.Center)
 
         sponsorsTextView.Font <- UIFont.FromName(FontBrandon, nfloat 14.)
+
         view.AddSubviews (featuredSponsorsLabel, sponsorsTextView)
+
         featuredSponsorsLabel.SizeToFit()
         let sponsorsTextViewHeight = nfloat 70.
 
+        view.AddConstraint(createTopConstraint featuredSponsorsLabel view padding)
+        view.AddConstraint(createBottomConstraint sponsorsTextView view (padding * nfloat -1.))
+        view.AddConstraint(createEqualConstraint NSLayoutAttribute.Bottom NSLayoutAttribute.Top featuredSponsorsLabel sponsorsTextView (nfloat 0.))
+
         view.ConstrainLayout
             <@ [|
-                featuredSponsorsLabel.Frame.Top = view.Frame.Top + padding
                 featuredSponsorsLabel.Frame.CenterX = view.Frame.CenterX
                 featuredSponsorsLabel.Frame.Width = view.Frame.Width
-                featuredSponsorsLabel.Frame.Bottom = sponsorsTextView.Frame.Top
 
                 sponsorsTextView.Frame.Height = sponsorsTextViewHeight
                 sponsorsTextView.Frame.CenterX = view.Frame.CenterX
                 sponsorsTextView.Frame.Width = view.Frame.Width
-                sponsorsTextView.Frame.Bottom = view.Frame.Bottom - padding
             |] @> |> ignore
 
         view
 
     let loadContent (viewController : UIViewController) =
         let view = new BaseView()
+
         let imgView = loadImageView "brand_logo.png"
         let logoButton = UIButton.FromType(UIButtonType.Custom)
+        logoButton.Frame <- CGRect(nfloat 0., topHeight, nfloat 0., nfloat 0.)
         logoButton.SetImage(UIImage.FromFile("brand_logo.png"), UIControlState.Normal)
 
         let alert = alertAboutPace()
@@ -113,22 +118,22 @@ type ViewController () =
         let contentWidth = UIScreen.MainScreen.Bounds.Width
 
         view.AddSubviews(logoButton, nextUpView, featuredSponsorView)
+        view.AddConstraint(createTopConstraint logoButton view topHeight)
+        view.AddConstraint(createEqualConstraint NSLayoutAttribute.Top NSLayoutAttribute.Bottom nextUpView logoButton (nfloat 0.))
+        view.AddConstraint(createEqualConstraint NSLayoutAttribute.Top NSLayoutAttribute.Bottom featuredSponsorView nextUpView (nfloat 0.))
+        view.AddConstraint(createEqualConstraint NSLayoutAttribute.Bottom NSLayoutAttribute.Top featuredSponsorView view (nfloat 0.))
 
         view.ConstrainLayout
             <@ [|
-                logoButton.Frame.Top = view.Frame.Top + topHeight
                 logoButton.Frame.CenterX = view.Frame.CenterX
 
-                nextUpView.Frame.Top = logoButton.Frame.Bottom + padding
                 nextUpView.Frame.CenterX = view.Frame.CenterX
                 nextUpView.Frame.Width = view.Frame.Width * adjustedWidth
 
-                featuredSponsorView.Frame.Top = nextUpView.Frame.Bottom + padding
                 featuredSponsorView.Frame.Width = view.Frame.Width * adjustedWidth
                 featuredSponsorView.Frame.CenterX = view.Frame.CenterX
-                featuredSponsorView.Frame.Bottom <= view.Frame.Bottom
 
-            |] @> |> ignore
+            |] @> |> ignore        
         view
 
     override x.DidReceiveMemoryWarning () =
@@ -140,3 +145,7 @@ type ViewController () =
         base.ViewDidLoad ()
         x.Title <- "2015 NLGLFF"
         x.View <- loadContent x
+
+    override x.ViewDidAppear (animated) =
+        base.ViewDidAppear(animated)
+        //x.View <- loadContent x

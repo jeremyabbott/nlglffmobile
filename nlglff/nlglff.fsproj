@@ -116,6 +116,7 @@
     <Compile Include="Nlglff.fs">
     </Compile>
     <Compile Include="EasyLayout.fs" />
+    <Compile Include="AutoLayout.fs" />
     <Compile Include="UIHelpers.fs">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Compile>
