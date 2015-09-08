@@ -5,6 +5,7 @@ open CoreGraphics
 open Foundation
 open UIKit
 open EasyLayout
+open Praeclarum.AutoLayout
 open Nlglff.Api
 open UIHelpers
 
@@ -21,7 +22,7 @@ type ViewController () =
         let alert = UIAlertController.Create("About the NLGLFF", aboutPace, UIAlertControllerStyle.Alert)
         alert
 
-    let nextUpView =
+    (*let nextUpView =
         let widescreen = nfloat 9. / nfloat 16.
 
         let view = new UIView(BackgroundColor = LogoGreen)
@@ -101,22 +102,25 @@ type ViewController () =
             |] @> |> ignore
 
         view
+    *)
 
-    let loadContent (viewController : UIViewController) =
+        
+    let content =
         let view = new BaseView()
-
-        let imgView = loadImageView "brand_logo.png"
         let logoButton = UIButton.FromType(UIButtonType.Custom)
-        logoButton.Frame <- CGRect(nfloat 0., topHeight, nfloat 0., nfloat 0.)
         logoButton.SetImage(UIImage.FromFile("brand_logo.png"), UIControlState.Normal)
+        logoButton.TranslatesAutoresizingMaskIntoConstraints <- false
 
-        let alert = alertAboutPace()
-        alert.AddAction(UIAlertAction.Create("Thanks!", UIAlertActionStyle.Default, fun _ -> "fuck" |> ignore))
 
-        logoButton.TouchUpInside.Add <| fun _ -> viewController.PresentViewController(alert, true, null)
+
 
         let contentWidth = UIScreen.MainScreen.Bounds.Width
-
+        view.AddSubview logoButton
+        let leading = nfloat 5.
+        view.AddConstraints [|logoButton.LayoutLeading == view.LayoutLeading + leading
+                              logoButton.LayoutCenterX == view.LayoutCenterX
+                              logoButton.LayoutTop == view.LayoutTop + topHeight|]
+        (*
         view.AddSubviews(logoButton, nextUpView, featuredSponsorView)
         view.AddConstraint(createTopConstraint logoButton view topHeight)
         view.AddConstraint(createEqualConstraint NSLayoutAttribute.Top NSLayoutAttribute.Bottom nextUpView logoButton (nfloat 0.))
@@ -133,7 +137,8 @@ type ViewController () =
                 featuredSponsorView.Frame.Width = view.Frame.Width * adjustedWidth
                 featuredSponsorView.Frame.CenterX = view.Frame.CenterX
 
-            |] @> |> ignore        
+            |] @> |> ignore       
+            *) 
         view
 
     override x.DidReceiveMemoryWarning () =
@@ -144,8 +149,8 @@ type ViewController () =
     override x.ViewDidLoad () =
         base.ViewDidLoad ()
         x.Title <- "2015 NLGLFF"
-        x.View <- loadContent x
+        x.View <- content
 
     override x.ViewDidAppear (animated) =
         base.ViewDidAppear(animated)
-        //x.View <- loadContent x
+
