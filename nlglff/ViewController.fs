@@ -22,7 +22,7 @@ type ViewController () =
         let alert = UIAlertController.Create("About the NLGLFF", aboutPace, UIAlertControllerStyle.Alert)
         alert
 
-    (*let nextUpView =
+    let nextUpView =
         let widescreen = nfloat 9. / nfloat 16.
 
         let view = new UIView(BackgroundColor = LogoGreen)
@@ -44,19 +44,15 @@ type ViewController () =
         view.AddSubviews (filmLabel, trailer)
         filmLabel.SizeToFit()
 
-        view.AddConstraint(createTopConstraint filmLabel view padding)
-        view.AddConstraint(createBottomConstraint trailer view (padding * nfloat -1.))
-        view.AddConstraint(createEqualConstraint NSLayoutAttribute.Bottom NSLayoutAttribute.Top filmLabel trailer (nfloat 0.))
+        addConstraints view [|filmLabel.LayoutTop == view.LayoutTop + padding
+                              filmLabel.LayoutCenterX == view.LayoutCenterX
+                              filmLabel.LayoutWidth == view.LayoutWidth
+                              trailer.LayoutTop == filmLabel.LayoutBottom
+                              trailer.LayoutCenterX == view.LayoutCenterX
+                              trailer.LayoutWidth == view.LayoutWidth * adjustedWidth
+                              trailer.LayoutHeight == trailer.LayoutWidth * widescreen
+                              view.LayoutBottom == trailer.LayoutBottom + padding|]
 
-        view.ConstrainLayout
-            <@ [|
-                filmLabel.Frame.CenterX = view.Frame.CenterX
-                filmLabel.Frame.Width = view.Frame.Width
-
-                trailer.Frame.CenterX = view.Frame.CenterX
-                trailer.Frame.Width = view.Frame.Width * adjustedWidth
-                trailer.Frame.Height = view.Frame.Width * widescreen
-            |] @> |> ignore
         view
  
     let featuredSponsorView =
@@ -77,16 +73,25 @@ type ViewController () =
         featuredSponsorsLabel.TextColor <- UIColor.White
         featuredSponsorsLabel.Font <- UIFont.FromName(FontOswald, nfloat 16.)
 
+        let sponsorsTextViewHeight = nfloat 70.
         let sponsorsTextView =
             new UITextView(Text = sponsorsText, Editable = false, BackgroundColor = LogoPink, TextColor = UIColor.White, TextAlignment = UITextAlignment.Center)
-
         sponsorsTextView.Font <- UIFont.FromName(FontBrandon, nfloat 14.)
 
         view.AddSubviews (featuredSponsorsLabel, sponsorsTextView)
 
         featuredSponsorsLabel.SizeToFit()
-        let sponsorsTextViewHeight = nfloat 70.
 
+        addConstraints view [|featuredSponsorsLabel.LayoutTop == view.LayoutTop + padding
+                              featuredSponsorsLabel.LayoutCenterX == view.LayoutCenterX
+                              featuredSponsorsLabel.LayoutWidth == view.LayoutWidth
+                              sponsorsTextView.LayoutTop == featuredSponsorsLabel.LayoutBottom
+                              sponsorsTextView.LayoutCenterX == view.LayoutCenterX
+                              sponsorsTextView.LayoutWidth == view.LayoutWidth * adjustedWidth
+                              view.LayoutBottom == sponsorsTextView.LayoutBottom + padding|]
+        addFixedHeightConstraint sponsorsTextView sponsorsTextViewHeight
+
+        (*
         view.AddConstraint(createTopConstraint featuredSponsorsLabel view padding)
         view.AddConstraint(createBottomConstraint sponsorsTextView view (padding * nfloat -1.))
         view.AddConstraint(createEqualConstraint NSLayoutAttribute.Bottom NSLayoutAttribute.Top featuredSponsorsLabel sponsorsTextView (nfloat 0.))
@@ -99,11 +104,9 @@ type ViewController () =
                 sponsorsTextView.Frame.Height = sponsorsTextViewHeight
                 sponsorsTextView.Frame.CenterX = view.Frame.CenterX
                 sponsorsTextView.Frame.Width = view.Frame.Width
-            |] @> |> ignore
+            |] @> |> ignore *)
 
         view
-    *)
-
         
     let content (viewController : UIViewController) =
         let view = new BaseView()
@@ -114,15 +117,22 @@ type ViewController () =
 
         logoButton.TouchUpInside.Add <| fun _ -> viewController.PresentViewController(alert, true, null)
 
-
         let contentWidth = UIScreen.MainScreen.Bounds.Width
-        view.AddSubview logoButton
-        let leading = nfloat 5.
-        addConstraints view [|logoButton.LayoutLeading == view.LayoutLeading + leading
-                              logoButton.LayoutCenterX == view.LayoutCenterX
-                              logoButton.LayoutTop == view.LayoutTop + topHeight|]
-        (*
+
         view.AddSubviews(logoButton, nextUpView, featuredSponsorView)
+
+        addConstraints view [|logoButton.LayoutCenterX == view.LayoutCenterX
+                              logoButton.LayoutTop == view.LayoutTop + topHeight
+                              nextUpView.LayoutTop == logoButton.LayoutBottom + padding
+                              nextUpView.LayoutCenterX == view.LayoutCenterX
+                              nextUpView.LayoutWidth == view.LayoutWidth * adjustedWidth
+                              nextUpView.LayoutBottom == featuredSponsorView.LayoutTop - padding
+                              //featuredSponsorView.LayoutTop == nextUpView.LayoutBottom + padding
+                              featuredSponsorView.LayoutCenterX == view.LayoutCenterX
+                              featuredSponsorView.LayoutWidth == view.LayoutWidth * adjustedWidth
+                              featuredSponsorView.LayoutBottom <== view.LayoutBottom|]
+        (*
+
         view.AddConstraint(createTopConstraint logoButton view topHeight)
         view.AddConstraint(createEqualConstraint NSLayoutAttribute.Top NSLayoutAttribute.Bottom nextUpView logoButton (nfloat 0.))
         view.AddConstraint(createEqualConstraint NSLayoutAttribute.Top NSLayoutAttribute.Bottom featuredSponsorView nextUpView (nfloat 0.))

@@ -20,6 +20,12 @@ let addConstraints (view : UIView) constraints =
     view.AddConstraints constraints
     Array.iter (fun (v : UIView) -> v.TranslatesAutoresizingMaskIntoConstraints <- false) view.Subviews
 
+let addFixedConstraint layoutAttribute (view: UIView) constant =
+     view.AddConstraint (NSLayoutConstraint.Create(view, layoutAttribute, NSLayoutRelation.Equal, null, NSLayoutAttribute.NoAttribute, nfloat 1., constant))
+
+let addFixedHeightConstraint (view: UIView) constant = 
+    addFixedConstraint NSLayoutAttribute.Height view constant
+
 let loadImageView fileName = new UIImageView(UIImage.FromFile(fileName))
 
 let getSectionHeader text =
