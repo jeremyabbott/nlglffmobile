@@ -60,51 +60,36 @@ type ViewController () =
         view.Layer.CornerRadius <- nfloat 5.0
         view.Layer.MasksToBounds <- true
 
-        let random = Random()
         let sponsors =
             let sponsorsArray = sponsorsForYear 2015
             shuffle sponsorsArray
-            sponsorsArray
+            sponsorsArray.[..4]
+            |> Array.map (fun s -> s.DisplayName)
+            |> Array.reduce (fun a e -> sprintf "%s\n%s" a e)
 
-        let sponsorsText = sprintf "%s\n%s\n%s" sponsors.[0].DisplayName sponsors.[1].DisplayName sponsors.[2].DisplayName
+        let sponsorsText = sponsors
         let featuredSponsorsLabel = new UILabel(Text = "Sponsored By" , TextAlignment = UITextAlignment.Center)
 
         featuredSponsorsLabel.BackgroundColor <- LogoPink
         featuredSponsorsLabel.TextColor <- UIColor.White
         featuredSponsorsLabel.Font <- UIFont.FromName(FontOswald, nfloat 16.)
 
-        let sponsorsTextViewHeight = nfloat 70.
+
         let sponsorsTextView =
             new UITextView(Text = sponsorsText, Editable = false, BackgroundColor = LogoPink, TextColor = UIColor.White, TextAlignment = UITextAlignment.Center)
         sponsorsTextView.Font <- UIFont.FromName(FontBrandon, nfloat 14.)
 
         view.AddSubviews (featuredSponsorsLabel, sponsorsTextView)
 
-        featuredSponsorsLabel.SizeToFit()
 
         addConstraints view [|featuredSponsorsLabel.LayoutTop == view.LayoutTop + padding
                               featuredSponsorsLabel.LayoutCenterX == view.LayoutCenterX
                               featuredSponsorsLabel.LayoutWidth == view.LayoutWidth
-                              sponsorsTextView.LayoutTop == featuredSponsorsLabel.LayoutBottom
+                              sponsorsTextView.LayoutTop == featuredSponsorsLabel.LayoutBottom + padding
                               sponsorsTextView.LayoutCenterX == view.LayoutCenterX
                               sponsorsTextView.LayoutWidth == view.LayoutWidth * adjustedWidth
-                              view.LayoutBottom == sponsorsTextView.LayoutBottom + padding|]
-        addFixedHeightConstraint sponsorsTextView sponsorsTextViewHeight
-
-        (*
-        view.AddConstraint(createTopConstraint featuredSponsorsLabel view padding)
-        view.AddConstraint(createBottomConstraint sponsorsTextView view (padding * nfloat -1.))
-        view.AddConstraint(createEqualConstraint NSLayoutAttribute.Bottom NSLayoutAttribute.Top featuredSponsorsLabel sponsorsTextView (nfloat 0.))
-
-        view.ConstrainLayout
-            <@ [|
-                featuredSponsorsLabel.Frame.CenterX = view.Frame.CenterX
-                featuredSponsorsLabel.Frame.Width = view.Frame.Width
-
-                sponsorsTextView.Frame.Height = sponsorsTextViewHeight
-                sponsorsTextView.Frame.CenterX = view.Frame.CenterX
-                sponsorsTextView.Frame.Width = view.Frame.Width
-            |] @> |> ignore *)
+                              sponsorsTextView.LayoutBottom == view.LayoutBottom - padding|]
+        //addFixedHeightConstraint sponsorsTextView sponsorsTextViewHeight
 
         view
         
@@ -127,29 +112,10 @@ type ViewController () =
                               nextUpView.LayoutCenterX == view.LayoutCenterX
                               nextUpView.LayoutWidth == view.LayoutWidth * adjustedWidth
                               nextUpView.LayoutBottom == featuredSponsorView.LayoutTop - padding
-                              //featuredSponsorView.LayoutTop == nextUpView.LayoutBottom + padding
+                              nextUpView.LayoutHeight == featuredSponsorView.LayoutHeight
                               featuredSponsorView.LayoutCenterX == view.LayoutCenterX
                               featuredSponsorView.LayoutWidth == view.LayoutWidth * adjustedWidth
-                              featuredSponsorView.LayoutBottom <== view.LayoutBottom|]
-        (*
-
-        view.AddConstraint(createTopConstraint logoButton view topHeight)
-        view.AddConstraint(createEqualConstraint NSLayoutAttribute.Top NSLayoutAttribute.Bottom nextUpView logoButton (nfloat 0.))
-        view.AddConstraint(createEqualConstraint NSLayoutAttribute.Top NSLayoutAttribute.Bottom featuredSponsorView nextUpView (nfloat 0.))
-        view.AddConstraint(createEqualConstraint NSLayoutAttribute.Bottom NSLayoutAttribute.Top featuredSponsorView view (nfloat 0.))
-
-        view.ConstrainLayout
-            <@ [|
-                logoButton.Frame.CenterX = view.Frame.CenterX
-
-                nextUpView.Frame.CenterX = view.Frame.CenterX
-                nextUpView.Frame.Width = view.Frame.Width * adjustedWidth
-
-                featuredSponsorView.Frame.Width = view.Frame.Width * adjustedWidth
-                featuredSponsorView.Frame.CenterX = view.Frame.CenterX
-
-            |] @> |> ignore       
-            *) 
+                              featuredSponsorView.LayoutBottom == view.LayoutBottom - (viewController.TabBarController.TabBar.Frame.Height + padding)|]
         view
 
     override x.DidReceiveMemoryWarning () =
@@ -161,7 +127,3 @@ type ViewController () =
         base.ViewDidLoad ()
         x.Title <- "2015 NLGLFF"
         x.View <- content x
-
-    override x.ViewDidAppear (animated) =
-        base.ViewDidAppear(animated)
-
