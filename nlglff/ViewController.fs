@@ -59,27 +59,23 @@ type ViewController () =
         view.Layer.CornerRadius <- nfloat 5.0
         view.Layer.MasksToBounds <- true
 
-        let sponsors =
+        let sponsorsText =
             let sponsorsArray = sponsorsForYear 2015
             shuffle sponsorsArray
             sponsorsArray.[..4]
             |> Array.map (fun s -> s.DisplayName)
             |> Array.reduce (fun a e -> sprintf "%s\n%s" a e)
 
-        let sponsorsText = sponsors
         let featuredSponsorsLabel = new UILabel(Text = "Sponsored By" , TextAlignment = UITextAlignment.Center)
-
         featuredSponsorsLabel.BackgroundColor <- LogoPink
         featuredSponsorsLabel.TextColor <- UIColor.White
         featuredSponsorsLabel.Font <- UIFont.FromName(FontOswald, nfloat 16.)
-
 
         let sponsorsTextView =
             new UITextView(Text = sponsorsText, Editable = false, BackgroundColor = LogoPink, TextColor = UIColor.White, TextAlignment = UITextAlignment.Center)
         sponsorsTextView.Font <- UIFont.FromName(FontBrandon, nfloat 14.)
 
         view.AddSubviews (featuredSponsorsLabel, sponsorsTextView)
-
 
         addConstraints view [|featuredSponsorsLabel.LayoutTop == view.LayoutTop + padding
                               featuredSponsorsLabel.LayoutCenterX == view.LayoutCenterX
@@ -88,7 +84,6 @@ type ViewController () =
                               sponsorsTextView.LayoutCenterX == view.LayoutCenterX
                               sponsorsTextView.LayoutWidth == view.LayoutWidth * adjustedWidth
                               sponsorsTextView.LayoutBottom == view.LayoutBottom - padding|]
-        //addFixedHeightConstraint sponsorsTextView sponsorsTextViewHeight
 
         view
         
