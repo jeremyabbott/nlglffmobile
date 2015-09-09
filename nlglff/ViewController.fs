@@ -4,7 +4,6 @@ open System
 open CoreGraphics
 open Foundation
 open UIKit
-open EasyLayout
 open Praeclarum.AutoLayout
 open Nlglff.Api
 open UIHelpers

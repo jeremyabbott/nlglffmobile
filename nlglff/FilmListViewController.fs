@@ -2,7 +2,7 @@
 
 open System
 open CoreGraphics
-open EasyLayout
+open Praeclarum.AutoLayout
 open Foundation
 open Nlglff.Api
 open UIHelpers
@@ -26,17 +26,14 @@ type FilmListViewController() =
         let padding = UIScreen.MainScreen.Bounds.Height
         let topHeight = UIApplication.SharedApplication.StatusBarFrame.Height
         let tableHeight = height - (headerImgView.Frame.Height + tabBarHeight)
+
         view.AddSubviews(headerImgView, filmListTable)
 
-        view.ConstrainLayout
-            <@ [|
-                headerImgView.Frame.Top = view.Frame.Top + topHeight
-                headerImgView.Frame.CenterX = view.Frame.CenterX
-
-                filmListTable.Frame.Top = headerImgView.Frame.Bottom + topHeight
-                filmListTable.Frame.Width = view.Frame.Width
-                filmListTable.Frame.Bottom = view.Frame.Bottom - tabBarHeight
-            |] @> |> ignore
+        addConstraints view [|headerImgView.LayoutTop == view.LayoutTop + topHeight
+                              headerImgView.LayoutCenterX == view.LayoutCenterX
+                              filmListTable.LayoutTop == headerImgView.LayoutBottom + nfloat 10.
+                              filmListTable.LayoutWidth == view.LayoutWidth
+                              filmListTable.LayoutBottom == view.LayoutBottom - tabBarHeight|]
         view
 
     override x.ViewDidLoad () =

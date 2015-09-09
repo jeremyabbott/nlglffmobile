@@ -2,7 +2,7 @@
 
 open System
 open System.Collections.Generic
-open EasyLayout
+open Praeclarum.AutoLayout
 open Foundation
 open Nlglff.Api
 open UIHelpers
@@ -22,15 +22,11 @@ type SponsorListViewController() =
         sponsorListTable.BackgroundColor <- LogoPink
         sponsorListTable.SeparatorStyle <- UITableViewCellSeparatorStyle.None
 
-        view.ConstrainLayout
-            <@ [|
-                headerImgView.Frame.Top = view.Frame.Top + topHeight
-                headerImgView.Frame.CenterX = view.Frame.CenterX
-
-                sponsorListTable.Frame.Top = headerImgView.Frame.Bottom + topHeight
-                sponsorListTable.Frame.Width = view.Frame.Width
-                sponsorListTable.Frame.Bottom = view.Frame.Bottom - navHeight
-            |] @> |> ignore
+        addConstraints view [|headerImgView.LayoutTop == view.LayoutTop + topHeight
+                              headerImgView.LayoutCenterX == view.LayoutCenterX
+                              sponsorListTable.LayoutTop == headerImgView.LayoutBottom + nfloat 10.
+                              sponsorListTable.LayoutWidth == view.LayoutWidth
+                              sponsorListTable.LayoutBottom == view.LayoutBottom - navHeight|]
         view
 
     override x.ViewDidLoad () =
