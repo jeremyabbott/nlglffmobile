@@ -15,5 +15,6 @@ type TabController () =
         let homeController = new ViewController()
         homeController.TabBarItem.Image <- UIImage.FromFile("home.png")
 
-        x.ViewControllers <- [| sponsorsController; homeController; filmsController;|]
+        let navController = new UINavigationController(filmsController)
+        x.ViewControllers <- [| sponsorsController; homeController; navController;|]
         x.SelectedViewController <- homeController

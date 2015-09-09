@@ -108,7 +108,7 @@ type FilmDetailViewController(film: Film) as x =
         view
 
     //let scrollView = new UIScrollView()
-    let content =
+    let content navBarHeight =
         let view = new UIView(BackgroundColor = UIColor.White)
 
         let headerImgView = loadImageView "brand_logo_films.png"
@@ -123,10 +123,7 @@ type FilmDetailViewController(film: Film) as x =
 
 
 
-        addConstraints view [|headerImgView.LayoutTop == view.LayoutTop + topHeight
-                              headerImgView.LayoutCenterX == view.LayoutCenterX
-
-                              trailerView.LayoutTop == headerImgView.LayoutBottom + padding
+        addConstraints view [|trailerView.LayoutTop == view.LayoutTop + (padding + navBarHeight)
                               trailerView.LayoutCenterX == view.LayoutCenterX
                               trailerView.LayoutWidth == view.LayoutWidth * adjustedWidth
 
@@ -147,7 +144,7 @@ type FilmDetailViewController(film: Film) as x =
     override x.ViewDidLoad () =
         base.ViewDidLoad ()
         x.Title <- film.Name
-        x.View <- content
+        x.View <- content x.NavigationController.NavigationBar.Frame.Height
 
     override x.ViewDidAppear (animated) =
         //let containerHeight = nfloat (containerView.Subviews |> Array.map (fun (v: UIView) -> float v.Frame.Height) |> Array.sum)

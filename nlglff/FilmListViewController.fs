@@ -13,25 +13,21 @@ type FilmListViewController() =
 
     let filmListTable = new UITableView(BackgroundColor = LogoPink)
 
-    let getContent tabBarHeight =
+    let getContent tabBarHeight navBarHeight =
         let view = new UIView(BackgroundColor = UIColor.White)
 
         filmListTable.TableFooterView <- new UIView(CGRect.Empty) // hides the footer and thus empty cells
         filmListTable.SeparatorStyle <- UITableViewCellSeparatorStyle.SingleLine
         filmListTable.SeparatorColor <- LogoGreen
 
-        let headerImgView = loadImageView "brand_logo_films.png"
-
         let height = UIScreen.MainScreen.Bounds.Height
         let padding = UIScreen.MainScreen.Bounds.Height
         let topHeight = UIApplication.SharedApplication.StatusBarFrame.Height
-        let tableHeight = height - (headerImgView.Frame.Height + tabBarHeight)
+        //let tableHeight = height - (headerImgView.Frame.Height + tabBarHeight)
 
-        view.AddSubviews(headerImgView, filmListTable)
+        view.AddSubviews(filmListTable)
 
-        addConstraints view [|headerImgView.LayoutTop == view.LayoutTop + topHeight
-                              headerImgView.LayoutCenterX == view.LayoutCenterX
-                              filmListTable.LayoutTop == headerImgView.LayoutBottom + nfloat 10.
+        addConstraints view [|filmListTable.LayoutTop == view.LayoutTop
                               filmListTable.LayoutWidth == view.LayoutWidth
                               filmListTable.LayoutBottom == view.LayoutBottom - tabBarHeight|]
         view
@@ -39,8 +35,14 @@ type FilmListViewController() =
     override x.ViewDidLoad () =
         base.ViewDidLoad ()
 
-        x.Title <- "Selected Films"
-        x.View <- (getContent x.TabBarController.TabBar.Frame.Height)
+        let imgView = loadImageView "brand_logo_films.png"
+        let centerY = x.NavigationController.NavigationBar.Frame.Height / nfloat 2.
+        imgView.Center <- new CGPoint(x.NavigationController.NavigationBar.Center.X, centerY)
+
+        x.NavigationController.NavigationBar.Translucent <- false
+
+        x.NavigationItem.TitleView <- imgView
+        x.View <- (getContent x.TabBarController.TabBar.Frame.Height x.NavigationController.NavigationBar.Frame.Height)
 
     override x.ViewWillAppear animated =
         base.ViewWillAppear animated
