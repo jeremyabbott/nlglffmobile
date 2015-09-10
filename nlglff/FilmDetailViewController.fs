@@ -9,7 +9,7 @@ open Nlglff.Api
 open WebKit
 open UIHelpers
 
-type FilmDetailViewController(film: Film) as x = 
+type FilmDetailViewController(film: Film) = 
     inherit UIViewController()
 
     let twenty = nfloat 20.
@@ -60,12 +60,15 @@ type FilmDetailViewController(film: Film) as x =
 
         view.AddSubviews(synopsisLabel, synopsis)
 
+        let height = synopsis.Font.LineHeight * nfloat 5.
+        synopsis.AddConstraint (NSLayoutConstraint.Create(synopsis, NSLayoutAttribute.Height, NSLayoutRelation.GreaterThanOrEqual, null, NSLayoutAttribute.NoAttribute, nfloat 1., height))
+
         addConstraints view [|synopsisLabel.LayoutTop == view.LayoutTop + padding
                               synopsisLabel.LayoutCenterX == view.LayoutCenterX
 
                               synopsis.LayoutTop == synopsisLabel.LayoutBottom + padding
                               synopsis.LayoutCenterX == synopsisLabel.LayoutCenterX
-                              synopsis.LayoutWidth == view.LayoutWidth * adjustedWidth
+                              synopsis.LayoutWidth >== view.LayoutWidth * adjustedWidth
                               synopsis.LayoutBottom == view.LayoutBottom - padding|]
 
         view
@@ -86,70 +89,81 @@ type FilmDetailViewController(film: Film) as x =
         
         let showtimes = new UITextView(Text = showtimeText, Editable = false, BackgroundColor = LogoGreen, TextAlignment = UITextAlignment.Center)
 
+        let height = showtimes.Font.LineHeight * nfloat 4.
         view.AddSubviews(showTimesLabel, showtimes)
+
+        showtimes.AddConstraint (NSLayoutConstraint.Create(showtimes, NSLayoutAttribute.Height, NSLayoutRelation.GreaterThanOrEqual, null, NSLayoutAttribute.NoAttribute, nfloat 1., height))
 
         addConstraints view [|showTimesLabel.LayoutTop == view.LayoutTop + padding
                               showTimesLabel.LayoutCenterX == view.LayoutCenterX
 
                               showtimes.LayoutTop == showTimesLabel.LayoutBottom + padding
                               showtimes.LayoutCenterX == showTimesLabel.LayoutCenterX
-                              showtimes.LayoutWidth == view.LayoutWidth * adjustedWidth
-                              showtimes.LayoutBottom == view.LayoutBottom - padding|]
+                              showtimes.LayoutWidth >== view.LayoutWidth * adjustedWidth
+                              view.LayoutBottom == showtimes.LayoutBottom + padding|]
 
         view
     
     let containerView =
         let view = new UIView(BackgroundColor = UIColor.White)
-        view.AddSubviews()
+        let s1 = new UIView()
 
-        addConstraints view [|
-                              |]
-        //addFixedHeightConstraint showtimesView (((view.Frame.Bottom - trailerView.Frame.Bottom) - padding ) * nfloat 0.5)
-        view
-
-    //let scrollView = new UIScrollView()
-    let content navBarHeight =
-        let view = new UIView(BackgroundColor = UIColor.White)
-
-        let headerImgView = loadImageView "brand_logo_films.png"
-        let backButton = UIButton.FromType(UIButtonType.RoundedRect)
-
-        backButton.SetTitle("Back to Films List", UIControlState.Normal)
-        backButton.TouchUpInside.Add <| fun _ -> x.DismissViewController(false, null)
-
-        view.AddSubviews(headerImgView, trailerView, synopsisView, showtimesView, backButton)
-        //scrollView.AddSubview(containerView)
-
-
+        let s2 = new UIView()
+        view.AddSubviews(trailerView, s1, synopsisView, s2, showtimesView)
 
 
         addConstraints view [|trailerView.LayoutTop == view.LayoutTop + padding
                               trailerView.LayoutCenterX == view.LayoutCenterX
                               trailerView.LayoutWidth == view.LayoutWidth * adjustedWidth
 
-                              synopsisView.LayoutTop == trailerView.LayoutBottom + padding
+                              s1.LayoutTop == trailerView.LayoutBottom
+                              s1.LayoutBottom <== synopsisView.LayoutTop
+
                               synopsisView.LayoutCenterX == view.LayoutCenterX
                               synopsisView.LayoutWidth == view.LayoutWidth * adjustedWidth
-                              synopsisView.LayoutHeight == showtimesView.LayoutHeight
 
-                              showtimesView.LayoutTop == synopsisView.LayoutBottom + padding
+                              s2.LayoutHeight == s1.LayoutHeight
+                              s2.LayoutTop == synopsisView.LayoutBottom
+                              s2.LayoutBottom <== showtimesView.LayoutTop
+
                               showtimesView.LayoutCenterX == view.LayoutCenterX
                               showtimesView.LayoutWidth == view.LayoutWidth * adjustedWidth
-                              showtimesView.LayoutBottom == backButton.LayoutTop - padding
+                              showtimesView.LayoutBottom == view.LayoutBottom - padding @@ 1000.0f |]
 
-                              backButton.LayoutCenterX == view.LayoutCenterX
-                              backButton.LayoutBottom == view.LayoutBottom - padding|]
+        s2.AddConstraint (NSLayoutConstraint.Create(s2, NSLayoutAttribute.Height, NSLayoutRelation.GreaterThanOrEqual, null, NSLayoutAttribute.NoAttribute, nfloat 1., nfloat 5.))
+        view
+
+    let scrollView = new UIScrollView()
+    let content navBarHeight tabBarHeight =
+        let view = new UIView(BackgroundColor = UIColor.White)
+
+        scrollView.AddSubview containerView
+
+        addConstraints scrollView [|containerView.LayoutTop == scrollView.LayoutTop
+                                    containerView.LayoutWidth == scrollView.LayoutWidth
+                                    containerView.LayoutBottom == scrollView.LayoutBottom
+                                    containerView.LayoutCenterX == scrollView.LayoutCenterX
+                                    containerView.LayoutHeight >== scrollView.LayoutHeight|]
+
+        view.AddSubview scrollView
+
+        addConstraints view [|scrollView.LayoutTop == view.LayoutTop
+                              scrollView.LayoutBottom == view.LayoutBottom - tabBarHeight
+                              scrollView.LayoutCenterX == view.LayoutCenterX
+                              scrollView.LayoutWidth == view.LayoutWidth|]
         view
 
     override x.ViewDidLoad () =
         base.ViewDidLoad ()
         x.Title <- film.Name
-        x.View <- content x.NavigationController.NavigationBar.Frame.Height
+        x.View <- content x.NavigationController.NavigationBar.Frame.Height x.TabBarController.TabBar.Frame.Height
         x.SetNavBarItemTitleView "brand_logo_films.png"
 
     override x.ViewDidAppear (animated) =
-        //let containerHeight = nfloat (containerView.Subviews |> Array.map (fun (v: UIView) -> float v.Frame.Height) |> Array.sum)
-        //let scrollViewHeight = containerHeight + (padding * nfloat 2.)
-        //scrollView.ContentSize <- CGRect(nfloat 0., nfloat 0., content.Frame.Width, scrollViewHeight).Size
-        
+
+        printfn "%A" scrollView.Frame.Top
+        printfn "%A" containerView.Frame.Top
+        printfn "%A" x.TabBarController.TabBar.Frame.Top
+        printfn "%A" containerView.Frame.Height
+        printfn "%A" scrollView.Frame.Height
         base.ViewDidAppear(animated)
