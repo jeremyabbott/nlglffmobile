@@ -123,7 +123,7 @@ type FilmDetailViewController(film: Film) as x =
 
 
 
-        addConstraints view [|trailerView.LayoutTop == view.LayoutTop + (padding + navBarHeight)
+        addConstraints view [|trailerView.LayoutTop == view.LayoutTop + padding
                               trailerView.LayoutCenterX == view.LayoutCenterX
                               trailerView.LayoutWidth == view.LayoutWidth * adjustedWidth
 
@@ -145,6 +145,7 @@ type FilmDetailViewController(film: Film) as x =
         base.ViewDidLoad ()
         x.Title <- film.Name
         x.View <- content x.NavigationController.NavigationBar.Frame.Height
+        x.SetNavBarItemTitleView "brand_logo_films.png"
 
     override x.ViewDidAppear (animated) =
         //let containerHeight = nfloat (containerView.Subviews |> Array.map (fun (v: UIView) -> float v.Frame.Height) |> Array.sum)
