@@ -20,15 +20,13 @@ type FilmsDataSource(filmSource: Film array, parent: UIViewController) =
             | cell -> cell
 
         cell.TextLabel.Text <- film.Name
-        cell.Accessory <- UITableViewCellAccessory.DetailButton
         cell.TintColor <- UIColor.White
+        cell.Accessory <- UITableViewCellAccessory.DisclosureIndicator
+
         cell
 
     override x.RowsInSection(view, section) = nint filmSource.Length
 
     override x.RowSelected (tableView, indexPath) = 
-        tableView.DeselectRow (indexPath, false)
-
-    override x.AccessoryButtonTapped (tableView, indexPath) =
-        parent.PresentViewController(new FilmDetailViewController(filmSource.[int indexPath.Item]), false, null)
-        tableView.DeselectRow (indexPath, false)
+        parent.NavigationController.PushViewController(new FilmDetailViewController(filmSource.[int indexPath.Item]), true)
+        tableView.DeselectRow (indexPath, true)

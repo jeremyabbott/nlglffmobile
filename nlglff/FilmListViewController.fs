@@ -23,7 +23,6 @@ type FilmListViewController() =
         let height = UIScreen.MainScreen.Bounds.Height
         let padding = UIScreen.MainScreen.Bounds.Height
         let topHeight = UIApplication.SharedApplication.StatusBarFrame.Height
-        //let tableHeight = height - (headerImgView.Frame.Height + tabBarHeight)
 
         view.AddSubviews(filmListTable)
 
@@ -35,13 +34,7 @@ type FilmListViewController() =
     override x.ViewDidLoad () =
         base.ViewDidLoad ()
 
-        let imgView = loadImageView "brand_logo_films.png"
-        let centerY = x.NavigationController.NavigationBar.Frame.Height / nfloat 2.
-        imgView.Center <- new CGPoint(x.NavigationController.NavigationBar.Center.X, centerY)
-
-        x.NavigationController.NavigationBar.Translucent <- false
-
-        x.NavigationItem.TitleView <- imgView
+        x.SetNavBarItemTitleView "brand_logo_films.png"
         x.View <- (getContent x.TabBarController.TabBar.Frame.Height x.NavigationController.NavigationBar.Frame.Height)
 
     override x.ViewWillAppear animated =

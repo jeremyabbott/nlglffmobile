@@ -10,7 +10,7 @@ type BaseUITableViewCell(cellId : string) as x =
     do
         x.SelectionStyle <- UITableViewCellSelectionStyle.None
         x.TextLabel.TextColor <- UIColor.White
-        x.TextLabel.Font <- UIFont.FromName(FontBrandon, nfloat 14.0)
+        x.TextLabel.Font <- UIFont.FromName(FontBrandon, nfloat 16.0)
         x.TextLabel.BackgroundColor <- UIColor.White
         x.BackgroundColor <- LogoPink
         x.TextLabel.TextAlignment <- UITextAlignment.Center

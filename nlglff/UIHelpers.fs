@@ -81,3 +81,10 @@ let shuffle a =
         a.[y] <- tmp
 
     Array.iteri (fun i _ -> swap a i (rand.Next(i, Array.length a))) a
+
+type UIViewController with
+    member x.SetNavBarItemTitleView imgName =
+        let imgView = loadImageView imgName
+        let centerY = x.NavigationController.NavigationBar.Frame.Height / nfloat 2.
+        imgView.Center <- new CGPoint(x.NavigationController.NavigationBar.Center.X, centerY)
+        x.NavigationItem.TitleView <- imgView
